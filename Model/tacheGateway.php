@@ -15,13 +15,27 @@ class tacheGateway
         $this->con = $con;
     }
 
-    public function ajouterTache($id, $nom, $desc, $fait)
+    public function ajouterTache($nom, $desc, $status)
     {
-        $this->con->executeQuery("insert into tache values(:id, :nom, :desc, :fait)", array(
+        $this->con->executeQuery("insert into tache(nom, description, status) values(:nom, :description, :status)", array(
+            ':nom' => array($nom, PDO::PARAM_STR),
+            ':description' => array($desc, PDO::PARAM_STR),
+            ':status' => array($status, PDO::PARAM_INT)
+        ));
+    }
+
+    public function supprimerTache($id)
+    {
+        $this->con->executeQuery("delete from tache where id = :id", array(':id' => array($id, PDO::PARAM_INT)));
+    }
+
+    public function modifierTache($id, $nom, $desc, $status)
+    {
+         $this->con->executeQuery("update tache set nom = :nom, description = :description, status = :status where id = :id", array(
             ':id' => array($id, PDO::PARAM_INT),
             ':nom' => array($nom, PDO::PARAM_STR),
-            ':desc' => array($desc, PDO::PARAM_STR),
-            ':fait' => array($fait, PDO::PARAM_INT)
+            ':description' => array($desc, PDO::PARAM_STR),
+            ':status' => array($status, PDO::PARAM_INT)
         ));
     }
 }
