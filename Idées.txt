@@ -1,0 +1,2 @@
+Il faudra faire comme le TD4 (Controller, FrontController, Model, Fabrique)
+Pas besoin de compte administrateur normalement vu qu'on ne peut rien voir si l'on est pas connecté.

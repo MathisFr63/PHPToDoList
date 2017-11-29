@@ -1,5 +1,5 @@
 <html>
-<head><title>Personne - formulaire</title>
+<head><title>Connexion</title>
 
     <script type="text/javascript">
         function clearForm(oForm) {
@@ -62,7 +62,7 @@ if (isset($dVue)) {
         }
         ?>
 
-        <h2>Personne - formulaire</h2>
+        <h2>Connexion</h2>
         <hr>
         <!-- affichage de donn�es provenant du mod�le -->
         <?= $dVue['data'] ?>
@@ -72,26 +72,29 @@ if (isset($dVue)) {
         "myform">
         <table>
             <tr>
-                <td>Nom</td>
-                <td><input name="txtNom" value="<?= $dVue['nom'] ?>" type="text" size="20"></td>
+                <td>Identifiant</td>
+                <td><input name="txtId" value="<?= $dVue['id'] ?>" type="text" size="20"></td>
             </tr>
             <tr>
-                <td>Age</td>
-                <td><input name="txtAge" value="<?= $dVue['age'] ?>" type="text" size="3" required></td>
+                <td>Mot de passe</td>
+                <td><input name="txtMdp" value="<?= $dVue['mdp'] ?>" type="password" size="3" required></td>
             </tr>
+<!--            Servira plus tard pour la page de connection-->
+<!--            <tr>-->
+<!--                <td>Confirmation</td>-->
+<!--                <td><input name="txtConfirmation" value="--><?//= $dVue['age'] ?><!--" type="password" size="3" required></td>-->
+<!--            </tr>-->
             <tr>
         </table>
         <table>
             <tr>
-                <td><input type="submit" value="Envoyer"></td>
-                <td><input type="reset" value="Rétablir"></td>
-                <td><input type="button" value="Effacer" onclick="clearForm(this.form);">
+                <td><input type="submit" value="Connexion"></td>
                 </td>
             </tr>
         </table>
 
         <!-- action !!!!!!!!!! -->
-        <input type="hidden" name="action" value="validationFormulaire">
+        <input type="hidden" name="action" value="validationConnexion">
         </form></div>
 
 <?php } else {

@@ -1,38 +1,49 @@
 <?php
 
-class Validation {
+class Validation
+{
 
-static function val_action($action) {
+    static function val_action($action)
+    {
 
-if (!isset($action)) {
-throw new Exception('pas d\'action');
-    //on pourrait aussi utiliser
+        if (!isset($action)) {
+            throw new Exception('pas d\'action');
+            //on pourrait aussi utiliser
 //$action = $_GET['action'] ?? 'no';
-    // This is equivalent to:
-    //$action =  if (isset($_GET['action'])) $action=$_GET['action']  else $action='no';
-}
-}
+            // This is equivalent to:
+            //$action =  if (isset($_GET['action'])) $action=$_GET['action']  else $action='no';
+        }
+    }
 
-    static function val_form(string &$nom, string &$age, array &$dVueEreur) {
-
-        if (!isset($nom)||$nom=="") {
-            $dVueEreur[] =	"pas de nom";
-            $nom="";
+    static function val_form(string &$id, string &$mdp, array &$dVueEreur)
+    {
+        if (!isset($id) || $id == "") {
+            $dVueEreur[] = "Pas d'identifiant";
+            $id = "";
         }
 
-        if ($nom != filter_var($nom, FILTER_SANITIZE_STRING))
-        {
-            $dVueEreur[] =	"testative d'injection de code (attaque sécurité)";
-            $nom="";
+        if (!isset($mdp) || $mdp == "") {
+            $dVueEreur[] = "Pas de mot de passe";
+            $mdp = "";
+        }
+
+        // Ici mettre le code pour vérifier l'identifiant et le mot de passe.
+
+        if ($id != filter_var($id, FILTER_SANITIZE_STRING)) {
+            $dVueEreur[] = "testative d'injection de code (attaque sécurité)";
+            $id = "";
 
         }
 
-        if (!isset($age)||$age==""||!filter_var($age, FILTER_VALIDATE_INT)) {
-            $dVueEreur[] =	"pas d'age ";
-            $age=0;
+        // Je comprends pas trop à quoi ça sert.
+        if ($mdp != filter_var($mdp, FILTER_SANITIZE_STRING)) {
+            $dVueEreur[] = "testative d'injection de code (attaque sécurité)";
+            $mdp = "";
+
         }
     }
 }
+
 ?>
 
         

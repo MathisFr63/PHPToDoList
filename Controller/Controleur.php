@@ -64,22 +64,22 @@ class Controleur
         require($rep . $view['vuephp1']);
     }
 
-    function ValidationFormulaire(array $dVueEreur)
+    function ValidationConnection(array $dVueEreur)
     {
         global $rep, $view;
 
-
 //si exception, ca remonte !!!
-        $nom = $_POST['txtNom']; // txtNom = nom du champ texte dans le formulaire
-        $age = $_POST['txtAge'];
-        Validation::val_form($nom, $age, $dVueEreur);
+        $id = $_POST['txtId']; // txtNom = nom du champ texte dans le formulaire
+        $mdp = $_POST['txtMdp'];
+        Validation::val_form($id, $mdp, $dVueEreur);
 
         $model = new Simplemodel();
         $data = $model->get_data();
 
+        // test pour afficher l'identifiant et le mot de passe.
         $dVue = array(
-            'nom' => $nom,
-            'age' => $age,
+            'id' => $id,
+            'mdp' => $mdp,
             'data' => $data,
         );
         require($rep . $view['vuephp1']);
