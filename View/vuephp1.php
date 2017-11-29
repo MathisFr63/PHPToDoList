@@ -46,6 +46,7 @@
 <body>
 <?php
 
+var_dump($data);
 
 // on v�rifie les donn�es provenant du mod�le
 if (isset($dVue)) {
@@ -55,7 +56,7 @@ if (isset($dVue)) {
 
         <?php
         if (isset($dVueEreur) && count($dVueEreur) > 0) {
-            echo "<h2>ERREUR !!!!!</h2>";
+            echo "<h2>ERREUR</h2>";
             foreach ($dVueEreur as $value) {
                 echo $value;
             }
@@ -67,17 +68,15 @@ if (isset($dVue)) {
         <!-- affichage de donn�es provenant du mod�le -->
         <?= $dVue['data'] ?>
 
-
-        <form method="post" name="myform" id
-        "myform">
+        <form method="post" name="myform" id="myform">
         <table>
             <tr>
                 <td>Identifiant</td>
-                <td><input name="txtId" value="<?= $dVue['id'] ?>" type="text" size="20"></td>
+                <td><input name="txtId" value="<?= $dVue['id'] ?>" type="text" size="20" required></td>
             </tr>
             <tr>
                 <td>Mot de passe</td>
-                <td><input name="txtMdp" value="<?= $dVue['mdp'] ?>" type="password" size="3" required></td>
+                <td><input name="txtMdp" value="<?= $dVue['mdp'] ?>" type="password" size="20" required></td>
             </tr>
 <!--            Servira plus tard pour la page de connection-->
 <!--            <tr>-->
@@ -94,7 +93,7 @@ if (isset($dVue)) {
         </table>
 
         <!-- action !!!!!!!!!! -->
-        <input type="hidden" name="action" value="validationConnexion">
+        <input type="hidden" name="action" value="ValidationConnection">
         </form></div>
 
 <?php } else {

@@ -23,6 +23,7 @@ $mdp="";
 
 $view['erreur']='View/erreur.php';
 $view['vuephp1']='View/vuephp1.php';
+$view['affichageTaches']='View/affichageTaches.php';
 
 
 ?>

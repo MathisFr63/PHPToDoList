@@ -4,7 +4,7 @@
 
 <body>
 
-<h1>ERREUR !!!!!</h1>
+<h1>ERREUR !</h1>
 <?php
 if (isset($dVueEreur)) {
     foreach ($dVueEreur as $value) {

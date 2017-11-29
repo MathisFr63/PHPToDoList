@@ -24,4 +24,10 @@ class tacheGateway
             ':fait' => array($fait, PDO::PARAM_INT)
         ));
     }
+
+    public function afficherTache() : array
+    {
+        $this->con->executeQuery('select * from tache');
+        return $this->con->getResults();
+    }
 }

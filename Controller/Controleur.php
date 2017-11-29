@@ -26,8 +26,8 @@ class Controleur
                     break;
 
 
-                case "validationFormulaire":
-                    $this->ValidationFormulaire($dVueEreur);
+                case "ValidationConnection":
+                    $this->ValidationConnection($dVueEreur);
                     break;
 
 //mauvaise action
@@ -69,20 +69,23 @@ class Controleur
         global $rep, $view;
 
 //si exception, ca remonte !!!
-        $id = $_POST['txtId']; // txtNom = nom du champ texte dans le formulaire
+        $id = $_POST['txtId']; // txtId = nom du champ texte dans le formulaire contenant l'id
         $mdp = $_POST['txtMdp'];
         Validation::val_form($id, $mdp, $dVueEreur);
 
         $model = new Simplemodel();
-        $data = $model->get_data();
+        $taches = $model->get_data();
 
         // test pour afficher l'identifiant et le mot de passe.
         $dVue = array(
             'id' => $id,
             'mdp' => $mdp,
-            'data' => $data,
+            'taches' => $taches
         );
-        require($rep . $view['vuephp1']);
+
+        // Il faudra appeler cette page que lorsque la connection aura échouée
+        // require($rep . $view['vuephp1']);
+        require($rep . $view['affichageTaches']);
     }
 
 }//fin class
