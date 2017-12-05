@@ -17,7 +17,7 @@ class tachePGateway
 
     public function ajouterTache($nom, $desc, $status, $user)
     {
-        $this->con->executeQuery("insert into tache(nom, description, status) values(:nom, :description, :status, :user)", array(
+        $this->con->executeQuery("insert into tachep(nom, description, status, user) values(:nom, :description, :status, :user)", array(
             ':nom' => array($nom, PDO::PARAM_STR),
             ':description' => array($desc, PDO::PARAM_STR),
             ':status' => array($status, PDO::PARAM_INT),
@@ -27,12 +27,12 @@ class tachePGateway
 
     public function supprimerTache($id)
     {
-        $this->con->executeQuery("delete from tache where id = :id", array(':id' => array($id, PDO::PARAM_INT)));
+        $this->con->executeQuery("delete from tachep where id = :id", array(':id' => array($id, PDO::PARAM_INT)));
     }
 
     public function modifierTache($id, $nom, $desc, $status, $user)
     {
-        $this->con->executeQuery("update tache set nom = :nom, description = :description, status = :status, user = :user where id = :id", array(
+        $this->con->executeQuery("update tachep set nom = :nom, description = :description, status = :status, user = :user where id = :id", array(
             ':id' => array($id, PDO::PARAM_INT),
             ':nom' => array($nom, PDO::PARAM_STR),
             ':description' => array($desc, PDO::PARAM_STR),
@@ -43,6 +43,8 @@ class tachePGateway
 
     public function afficherTache($user)
     {
-        return $this->con->executeQuery("select * from tacheP where user = :user", array(':user' => array($user, PDO::PARAM_STR)))->getResults();
+        $this->con->executeQuery("select * from tachep where user = :user", array(':user' => array($user, PDO::PARAM_STR)));
+//        $this->con->executeQuery('select * from tache');
+        return $this->con->getResults();
     }
 }

@@ -57,10 +57,6 @@ class Controleur
     {
         global $rep, $view; // nécessaire pour utiliser variables globales
 
-        $dVue = array(
-            'nom' => "",
-            'age' => 0,
-        );
         require($rep . $view['vuephp1']);
     }
 
@@ -87,6 +83,21 @@ class Controleur
         // require($rep . $view['vuephp1']);
         require($rep . $view['affichageTaches']);
     }
+
+    function ValidationDeconnection(array $dVueEreur)
+{
+    global $rep, $view;
+
+//si exception, ca remonte !!!
+//    $model = new Simplemodel();
+//    $dVue = array(
+//        'id' => "",
+//        'mdp' => "",
+//        'taches' => null
+//    );
+//    require($rep . $view['vuephp1']);
+        $this->Reinit();
+}
 
 }//fin class
 
