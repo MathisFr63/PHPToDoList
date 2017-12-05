@@ -74,7 +74,7 @@ class ControleurConnecte
         $mdp = $_POST['txtMdp'];
         Validation::val_form($id, $mdp, $dVueEreur);
 
-        $model = new Simplemodel();
+        $model = new Model();
         $taches = $model->get_data();
         $tachesCo = $model->get_data_co();
 
@@ -96,7 +96,7 @@ class ControleurConnecte
         global $rep, $view;
 
 //si exception, ca remonte !!!
-//        $model = new Simplemodel();
+//        $model = new Model();
 //        $dVue = array(
 //            'id' => "",
 //            'mdp' => "",

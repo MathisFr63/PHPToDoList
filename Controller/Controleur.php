@@ -69,7 +69,7 @@ class Controleur
         $mdp = $_POST['txtMdp'];
         Validation::val_form($id, $mdp, $dVueEreur);
 
-        $model = new Simplemodel();
+        $model = new Model();
         $taches = $model->get_data();
 
         // test pour afficher l'identifiant et le mot de passe.
@@ -89,7 +89,7 @@ class Controleur
     global $rep, $view;
 
 //si exception, ca remonte !!!
-//    $model = new Simplemodel();
+//    $model = new Model();
 //    $dVue = array(
 //        'id' => "",
 //        'mdp' => "",
