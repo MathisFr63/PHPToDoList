@@ -31,8 +31,20 @@ class ControllerConnecte
                     $this->ValidationConnection($dVueEreur);
                     break;
 
-                case "AjouterTachePublique":
-                    $this->AjouterTachePublique();
+                case "AddPublicTask":
+                    $this->AddPublicTask();
+                    break;
+
+                case "AddPrivateTask":
+                    $this->AddPrivateTask();
+                    break;
+
+                case "SupprimerTachePublique" :
+                    $this->SupprimerTachePublique();
+                    break;
+
+                case "SupprimerTachePrivee" :
+                    $this->SupprimerTachePrivee();
                     break;
 
 //mauvaise action
@@ -69,7 +81,8 @@ class ControllerConnecte
         require($rep . $view['vuephp1']);
     }
 
-    function AjouterTachePublique(){
+    function AddPublicTask()
+    {
         $dVueEreur = array();
         global $rep, $view;
 
@@ -80,7 +93,50 @@ class ControllerConnecte
         $model = new MdlTask();
         $model->ajouterTachePublique($nom, $desc);
 
-        $this->ValidationConnection($dVueEreur);
+        $this->Reinit();
+    }
+
+    function AddPrivateTask()
+    {
+        $dVueEreur = array();
+        global $rep, $view;
+
+        $nom = $_POST['txtNom'];
+        $desc = $_POST['txtDesc'];
+        $user = $_POST['user'];
+        Validation::val_addPrivate($nom, $desc, $user, $dVueEreur);
+
+        $model = new MdlTask();
+        $model->ajouterTachePrivee($nom, $desc, $user);
+
+        $this->Reinit();
+    }
+
+    function SupprimerTachePublique()
+    {
+        $dVueEreur = array();
+        global $rep, $view;
+
+        $idTache = $_POST['idTache'];
+
+        $model = new MdlTask();
+        $model->supprimerTachePublique($idTache);
+
+        $this->Reinit();
+    }
+
+    function SupprimerTachePrivee()
+    {
+        $dVueEreur = array();
+        global $rep, $view;
+
+        $idTache = $_POST['idTache'];
+        $user = $_POST['user'];
+
+        $model = new MdlTask();
+        $model->SupprimerTachePrivee($idTache, $user);
+
+        $this->Reinit();
     }
 
     function ValidationConnection(array $dVueEreur)

@@ -88,6 +88,7 @@ if (isset($dVue)) {
                     print $row['nom'] . ' : ' . $row['description'];
                     ?>
                     <input type="submit" value="Supprimer">
+                    <input type="hidden" name="idTache" value="<?php print $row['id']?>">
                     <input type="hidden" name="action" value="SupprimerTachePublique">
                     <?php
                     print "<BR>";
@@ -100,28 +101,43 @@ if (isset($dVue)) {
                 <input type="text" name="txtNom" required>
                 <input type="text" name="txtDesc" required>
                 <input type="submit" value="Ajouter">
-                <input type="hidden" name="action" value="AjouterTachePublique">
+                <input type="hidden" name="action" value="AddPublicTask">
             </form>
             <?php
-            }
+        }
 
-            if (isset($tachesCo) && count($tachesCo) > 0) {
+        if (isset($tachesCo) && count($tachesCo) > 0) {
             ?>
             <br><br>
             <h2 align="center">Tâches personnelles</h2>
             <hr/><?php
             foreach ($tachesCo as $row) {
                 ?>
-                <form>
+                <form method="post" name="myform" id="myform">
                     <!-- engadget -->
                     <input name="checkFait" <?php if ($row['status'] == 1) echo 'checked'; ?> type="checkbox">
                     <?php
                     print $row['nom'] . ' : ' . $row['description'];
+                    ?>
+                    <input type="submit" value="Supprimer">
+                    <input type="hidden" name="idTache" value="<?php print $row['id']?>">
+                    <input type="hidden" name="user" value="<?php print $id?>">
+                    <input type="hidden" name="action" value="SupprimerTachePrivee">
+                    <?php
                     print "<BR>";
                     ?>
                 </form>
                 <?php
             }
+            ?>
+            <form method="post" name="myform" id="myform">
+                <input type="text" name="txtNom" required>
+                <input type="text" name="txtDesc" required>
+                <input type="hidden" name="user" value="<?php print $id ?>">
+                <input type="submit" value="Ajouter">
+                <input type="hidden" name="action" value="AddPrivateTask">
+            </form>
+            <?php
         }
         ?>
     <?php }

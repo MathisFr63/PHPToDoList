@@ -17,7 +17,6 @@ class tachePGateway
 
     public function ajouterTachePublique($nom, $desc)
     {
-<<<<<<< HEAD
         $this->con->executeQuery("insert into tache(nom, description, status) values(:nom, :desc, 0)", array(
             ':nom' => array($nom, PDO::PARAM_STR),
             ':desc' => array($desc, PDO::PARAM_STR)
@@ -27,18 +26,20 @@ class tachePGateway
     public function ajouterTachePrivee($nom, $desc, $user)
     {
         $this->con->executeQuery("insert into tachep(nom, description, status, user) values(:nom, :description, 0, :user)", array(
-=======
-        $this->con->executeQuery("insert into tacheP(nom, description, status, user) values(:nom, :description, :status, :user)", array(
->>>>>>> 7907d0f0fed660d4eb50d8a897871996a2930d71
             ':nom' => array($nom, PDO::PARAM_STR),
             ':description' => array($desc, PDO::PARAM_STR),
             ':user' => array($user, PDO::PARAM_STR)
         ));
     }
 
-    public function supprimerTache($id)
+    public function supprimerTachePublique($id)
     {
-        $this->con->executeQuery("delete from tacheP where id = :id", array(':id' => array($id, PDO::PARAM_INT)));
+        $this->con->executeQuery("delete from tache where id = :id", array(':id' => array($id, PDO::PARAM_INT)));
+    }
+
+    public function SupprimerTachePrivee($id, $user)
+    {
+        $this->con->executeQuery("delete from tachep where user = :user and id = :id", array(':user' => array($user, PDO::PARAM_STR), ':id' => array($id, PDO::PARAM_INT)));
     }
 
     public function modifierTache($id, $nom, $desc, $status, $user)
@@ -54,17 +55,14 @@ class tachePGateway
 
     public function afficherTaches() : array
     {
+        print "2.1.1";
         $this->con->executeQuery('select * from tache');
         return $this->con->getResults();
     }
 
     public function afficherTachesUser($login) : array
     {
-<<<<<<< HEAD
         $this->con->executeQuery("select * from tacheP where user = :user", array(':user' => array($login, PDO::PARAM_STR)));
-=======
-        $this->con->executeQuery("select * from tacheP where user = :user", array(':user' => array($user, PDO::PARAM_STR)));
->>>>>>> 7907d0f0fed660d4eb50d8a897871996a2930d71
 //        $this->con->executeQuery('select * from tache');
         return $this->con->getResults();
     }
