@@ -1,2 +1,20 @@
 Il faudra faire comme le TD4 (Controller, FrontController, Model, Fabrique)
-Pas besoin de compte administrateur normalement vu qu'on ne peut rien voir si l'on est pas connect�.
+Pas besoin de compte administrateur normalement vu qu'on ne peut rien voir si l'on est pas connect�.
+
+------------------------------------------------------------------------------------------------------------------------
+
+Reprendre toutes les vues : elles doivent appeler index.php
+Code principal du front controller dans son constructeur
+
+Le front controller possède un modèle, tout les controllers(user, admin) et la vue d'erreur.
+
+?? Dans tous les cas vue d'erreur (p27 bas).
+
+Connexion : Vérifie en base si l'admin ou l'utilisateur existe.
+Déconnexion : Détruit la session
+isAdmin : lit dans la session le rôle de l'utilisateur(retourne soit booléen soit instance d'objet)
+
+------------------------------------------------------------------------------------------------------------------------
+
+Voir pourquoi isAdmin ne marche pas
+Voir avec le prof comment faire en fonction de la connection dans le FC (dans le model ou dans la validation ou dans la classe FC) ?

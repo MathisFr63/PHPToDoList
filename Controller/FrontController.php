@@ -1,9 +1,13 @@
 <?php
+/**
+ * Created by PhpStorm.
+ * User: Mathis
+ * Date: 06/12/2017
+ * Time: 10:21
+ */
 
-class ControleurConnecte
+class FrontController
 {
-
-
     function __construct()
     {
         global $rep, $view; // nécessaire pour utiliser variables globales
@@ -21,17 +25,15 @@ class ControleurConnecte
 
             switch ($action) {
 
-//pas d'action, on r�initialise 1er appel
+                //pas d'action, on r�initialise 1er appel
                 case NULL:
                     $this->Reinit();
                     break;
 
-
                 case "ValidationConnection":
                     $this->ValidationConnection($dVueEreur);
                     break;
-
-//mauvaise action
+                //mauvaise action
                 default:
                     $dVueEreur[] = "Erreur d'appel php";
                     require($rep . $view['vuephp1']);
@@ -53,14 +55,13 @@ class ControleurConnecte
         exit(0);
     }//fin constructeur
 
-
     function Reinit()
     {
         global $rep, $view; // nécessaire pour utiliser variables globales
-
         $dVue = array(
-            'nom' => "",
-            'age' => 0,
+            'id' => "",
+            'mdp' => "",
+            'taches' => ""
         );
         require($rep . $view['vuephp1']);
     }
@@ -69,41 +70,31 @@ class ControleurConnecte
     {
         global $rep, $view;
 
-//si exception, ca remonte !!!
+        // FAIRE LE NETTOYAGE !
+
+        //si exception, ca remonte !!!
         $id = $_POST['txtId']; // txtId = nom du champ texte dans le formulaire contenant l'id
         $mdp = $_POST['txtMdp'];
         Validation::val_form($id, $mdp, $dVueEreur);
 
-        $model = new Model();
+//        if ($dVueEreur == null){
+        $model = new MdlFC();
         $taches = $model->get_data();
-        $tachesCo = $model->get_data_co();
+//        Ne marche pas, je sais pas pourquoi !
+        //        $_SESSION['role'] = $model->isAdmin();
+        print "Test";
+        $_SESSION['login'] = $id;
+//        }
 
         // test pour afficher l'identifiant et le mot de passe.
         $dVue = array(
             'id' => $id,
             'mdp' => $mdp,
-            'taches' => $taches,
-            'tachesCo' => $tachesCo
+            'taches' => $taches
         );
 
         // Il faudra appeler cette page que lorsque la connection aura échouée
         // require($rep . $view['vuephp1']);
         require($rep . $view['affichageTaches']);
-    }
-
-    function ValidationDeconnection(array $dVueEreur)
-    {
-        global $rep, $view;
-
-//si exception, ca remonte !!!
-//        $model = new Model();
-//        $dVue = array(
-//            'id' => "",
-//            'mdp' => "",
-//            'taches' => null,
-//            'tachesCo' => null
-//        );
-        $this->Reinit();
-//        require($rep . $view['vuephp1']);
     }
 }

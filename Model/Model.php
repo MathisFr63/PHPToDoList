@@ -13,11 +13,6 @@ class Model
     {
         return $this->tg->afficherTache();
     }
-
-    function get_data_co() : array
-    {
-        return $this->tPg->afficherTache("mafrizot1");
-    }
 }
 
 ?>

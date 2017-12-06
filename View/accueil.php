@@ -55,6 +55,7 @@ if (isset($dVueEreur) && count($dVueEreur) > 0) {
         echo $value;
     }
 }
+else{
 ?>
 <div>
     <h2 style="display: inline-block;" align="center">Les tâches</h2>
@@ -112,7 +113,7 @@ foreach ($tachesCo as $row) {
 }
 }
 ?>
-<?php } else {
+<?php }} else {
     print ("erreur !!<br>");
     print ("utilisation anormale de la vuephp");
 } ?>

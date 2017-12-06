@@ -97,7 +97,7 @@ if (isset($dVue)) {
         </form></div>
 
 <?php } else {
-    print ("erreur !!<br>");
+    print ("Attention, erreur !!<br>");
     print ("utilisation anormale de la vuephp");
 } ?>
 <p>Essayez de mettre du code html dans nom -> Correspond à une attaque de type injection</p>

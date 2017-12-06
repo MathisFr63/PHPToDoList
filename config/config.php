@@ -11,19 +11,19 @@ $rep=__DIR__.'/../';
 
 //BD
 
-$base="sasa";
-$login="";
-$mdp="";
+//$base="sasa";
+//$login="";
+//$mdp="";
 
-// $base="dbmafrizot1";
-// $login="mafrizot1";
-// $mdp="mafrizot1";
+ $base="dbmafrizot1";
+ $login="root";
+ $mdp="";
 
 //Vues
 
 $view['erreur']='View/erreur.php';
 $view['vuephp1']='View/vuephp1.php';
-$view['affichageTaches']='View/affichageTaches.php';
+$view['affichageTaches']='View/accueil.php';
 
 
 ?>

@@ -6,9 +6,11 @@
  * Time: 7:50 PM
  */
 
-class ModelConnecte
+class MdlUser
 {
     private $tPg;
+    // Identifiant de la personne connectée.
+    private $id;
 
     public function __construct()
     {
@@ -16,6 +18,11 @@ class ModelConnecte
     }
 
     function get_data() : array
+    {
+        return $this->tPg->afficherTache("mafrizot1");
+    }
+
+    function get_data_co() : array
     {
         return $this->tPg->afficherTache("mafrizot1");
     }
