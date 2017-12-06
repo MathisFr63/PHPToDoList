@@ -18,10 +18,17 @@ class MdlUser
         $this->tPg = new tacheGateway(new Connection('mysql:host=hina;dbname=dbmafrizot1', 'mafrizot1', 'mafrizot1'));
     }
 
+<<<<<<< HEAD
     function get_tasks_public() : array
     {
         return $this->tPg->afficherTaches();
     }
+=======
+//    function get_data() : array
+//    {
+//        return $this->tPg->afficherTache("mafrizot1");
+//    }
+>>>>>>> 7907d0f0fed660d4eb50d8a897871996a2930d71
 
     function get_tasks_user($login) : array
     {
