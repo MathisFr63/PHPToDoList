@@ -47,73 +47,85 @@
 
 // on v�rifie les donn�es provenant du mod�le
 if (isset($dVue)) {
-?>
-<?php
-if (isset($dVueEreur) && count($dVueEreur) > 0) {
-    echo "<h2>ERREUR</h2>";
-    foreach ($dVueEreur as $value) {
-        echo $value;
-    }
-}
-else{
-?>
-<div>
-    <h2 style="display: inline-block;" align="center">Les tâches</h2>
-    <form style="float: right;" method="post" name="myform" id="myform">
-        <?php
-        if (isset($tachesCo)) {
-            ?>
-            <input type="submit" value="Deconnexion">
-            <input type="hidden" name="action" value="ValidationDeconnection">
-            <?php
-        } else {
-            ?>
-            <input type="submit" value="Connexion">
-            <input type="hidden" name="action" value="ValidationConnection">
-        <?php }
+    ?>
+    <?php
+    if (isset($dVueEreur) && count($dVueEreur) > 0) {
+        echo "<h2>ERREUR</h2>";
+        foreach ($dVueEreur as $value) {
+            echo $value;
+        }
+    } else {
         ?>
-    </form>
-</div>
-<hr>
-<!-- affichage de donn�es provenant du mod�le -->
-<?= $dVue['data'] ?>
+        <div>
+            <h2 style="display: inline-block;" align="center">Les tâches</h2>
+            <form style="float: right;" method="post" name="myform" id="myform">
+                <?php
+                if (isset($tachesCo)) {
+                    ?>
+                    <input type="submit" value="Deconnexion">
+                    <input type="hidden" name="action" value="ValidationDeconnection">
+                    <?php
+                } else {
+                    ?>
+                    <input type="submit" value="Connexion">
+                    <input type="hidden" name="action" value="ValidationConnection">
+                <?php }
+                ?>
+            </form>
+        </div>
+        <hr>
+        <!-- affichage de donn�es provenant du mod�le -->
+        <?= $dVue['data'] ?>
 
-<?php
-if (isset($taches) && count($taches) > 0) {
-foreach ($taches as $row) {
-?>
-<form>
-    <!-- engadget -->
-    <input name="checkFait" <?php if ($row['status'] == 1) echo 'checked'; ?> type="checkbox">
-    <?php
-    print $row['nom'] . ' : ' . $row['description'];
-    print "<BR>";
-    ?>
-</form>
-<?php
-}
-}
+        <?php
+        if (isset($taches) && count($taches) > 0) {
+            foreach ($taches as $row) {
+                ?>
+                <form method="post" name="myform" id="myform">
+                    <!-- engadget -->
+                    <input name="checkFait" <?php if ($row['status'] == 1) echo 'checked'; ?> type="checkbox">
+                    <?php
+                    print $row['nom'] . ' : ' . $row['description'];
+                    ?>
+                    <input type="submit" value="Supprimer">
+                    <input type="hidden" name="action" value="SupprimerTachePublique">
+                    <?php
+                    print "<BR>";
+                    ?>
+                </form>
+                <?php
+            }
+            ?>
+            <form method="post" name="myform" id="myform">
+                <input type="text" name="txtNom" required>
+                <input type="text" name="txtDesc" required>
+                <input type="submit" value="Ajouter">
+                <input type="hidden" name="action" value="AjouterTachePublique">
+            </form>
+            <?php
+            }
 
-if (isset($tachesCo) && count($tachesCo) > 0) {
-?>
-<br><br>
-<h2 align="center">Tâches personnelles</h2>
-<hr/><?php
-foreach ($tachesCo as $row) {
-?>
-<form>
-    <!-- engadget -->
-    <input name="checkFait" <?php if ($row['status'] == 1) echo 'checked'; ?> type="checkbox">
-    <?php
-    print $row['nom'] . ' : ' . $row['description'];
-    print "<BR>";
-    ?>
-</form>
-<?php
-}
-}
-?>
-<?php }} else {
+            if (isset($tachesCo) && count($tachesCo) > 0) {
+            ?>
+            <br><br>
+            <h2 align="center">Tâches personnelles</h2>
+            <hr/><?php
+            foreach ($tachesCo as $row) {
+                ?>
+                <form>
+                    <!-- engadget -->
+                    <input name="checkFait" <?php if ($row['status'] == 1) echo 'checked'; ?> type="checkbox">
+                    <?php
+                    print $row['nom'] . ' : ' . $row['description'];
+                    print "<BR>";
+                    ?>
+                </form>
+                <?php
+            }
+        }
+        ?>
+    <?php }
+} else {
     print ("erreur !!<br>");
     print ("utilisation anormale de la vuephp");
 } ?>

@@ -95,6 +95,6 @@ class FrontController
 
         // Il faudra appeler cette page que lorsque la connection aura échouée
         // require($rep . $view['vuephp1']);
-        require($rep . $view['affichageTaches']);
+        require($rep . $view['accueil']);
     }
 }

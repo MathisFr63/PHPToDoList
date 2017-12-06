@@ -31,6 +31,10 @@ class ControllerConnecte
                     $this->ValidationConnection($dVueEreur);
                     break;
 
+                case "AjouterTachePublique":
+                    $this->AjouterTachePublique();
+                    break;
+
 //mauvaise action
                 default:
                     $dVueEreur[] = "Erreur d'appel php";
@@ -40,7 +44,7 @@ class ControllerConnecte
 
         } catch (PDOException $e) {
             //si erreur BD, pas le cas ici
-            $dVueEreur[] = "Erreur inattendue!!! ";
+            $dVueEreur[] = "Erreur inattendue!!! PDO";
             require($rep . $view['erreur']);
 
         } catch (Exception $e2) {
@@ -65,6 +69,20 @@ class ControllerConnecte
         require($rep . $view['vuephp1']);
     }
 
+    function AjouterTachePublique(){
+        $dVueEreur = array();
+        global $rep, $view;
+
+        $nom = $_POST['txtNom'];
+        $desc = $_POST['txtDesc'];
+        Validation::val_ajout($nom, $desc, $dVueEreur);
+
+        $model = new MdlTask();
+        $model->ajouterTachePublique($nom, $desc);
+
+        $this->ValidationConnection($dVueEreur);
+    }
+
     function ValidationConnection(array $dVueEreur)
     {
         global $rep, $view;
@@ -74,9 +92,13 @@ class ControllerConnecte
         $mdp = $_POST['txtMdp'];
         Validation::val_form($id, $mdp, $dVueEreur);
 
-        $model = new MdlUser();
-        $taches = $model->get_data();
-        $tachesCo = $model->get_data_co();
+        $model = new MdlTask();
+        $taches = $model->get_tasks_public();
+
+        $tachesCo = $model->get_tasks_user($id);
+
+        // Affiche le nombre de tâches privées.
+        print count($tachesCo);
 
         // test pour afficher l'identifiant et le mot de passe.
         $dVue = array(
@@ -88,7 +110,7 @@ class ControllerConnecte
 
         // Il faudra appeler cette page que lorsque la connection aura échouée
         // require($rep . $view['vuephp1']);
-        require($rep . $view['affichageTaches']);
+        require($rep . $view['accueil']);
     }
 
     function ValidationDeconnection(array $dVueEreur)

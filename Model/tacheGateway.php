@@ -39,7 +39,7 @@ class tacheGateway
         ));
     }
 
-    public function afficherTache() : array
+    public function afficherTaches() : array
     {
         $this->con->executeQuery('select * from tache');
         return $this->con->getResults();

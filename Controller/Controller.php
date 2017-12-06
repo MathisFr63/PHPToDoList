@@ -30,6 +30,7 @@ class Controller
                     $this->ValidationConnection($dVueEreur);
                     break;
 
+
 //mauvaise action
                 default:
                     $dVueEreur[] = "Erreur d'appel php";
@@ -85,7 +86,7 @@ class Controller
 
         // Il faudra appeler cette page que lorsque la connection aura échouée
         // require($rep . $view['vuephp1']);
-        require($rep . $view['affichageTaches']);
+        require($rep . $view['accueil']);
     }
 
     function ValidationDeconnection(array $dVueEreur)

@@ -23,7 +23,7 @@ $rep=__DIR__.'/../';
 
 $view['erreur']='View/erreur.php';
 $view['vuephp1']='View/vuephp1.php';
-$view['affichageTaches']='View/accueil.php';
+$view['accueil']='View/accueil.php';
 
 
 ?>

@@ -14,16 +14,17 @@ class MdlUser
 
     public function __construct()
     {
-        $this->tPg = new tacheGateway(new Connection('mysql:host=localhost;dbname=dbmafrizot1', 'root', ''));
+//        $this->tPg = new tacheGateway(new Connection('mysql:host=localhost;dbname=dbmafrizot1', 'root', ''));
+        $this->tPg = new tacheGateway(new Connection('mysql:host=hina;dbname=dbmafrizot1', 'mafrizot1', 'mafrizot1'));
     }
 
-    function get_data() : array
+    function get_tasks_public() : array
     {
-        return $this->tPg->afficherTache("mafrizot1");
+        return $this->tPg->afficherTaches();
     }
 
-    function get_data_co() : array
+    function get_tasks_user($login) : array
     {
-        return $this->tPg->afficherTache("mafrizot1");
+        return $this->tPg->afficherTachesUser($login);
     }
 }

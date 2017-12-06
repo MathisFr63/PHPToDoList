@@ -42,12 +42,39 @@ class Validation
 
         // Test de récupération de la personne dans la base.
         // Sûrement à mettre autre part !!! par exemple dans le model du FC.
-        $bd = new Connection('mysql:host=localhost;dbname=dbmafrizot1', 'root', '');
-        $bd->executeQuery('select * from user where identifiant = :id and mdp = :mdp', array(
-            ':id' => array($id, PDO::PARAM_STR),
-            ':mdp' => array($mdp, PDO::PARAM_STR)));
-        if ($bd->getResults() == null) {
-            $dVueEreur[] = "La combinaison identifiant, mot de passe n'est liée à aucun utilisateur";
+//        $bd = new Connection('mysql:host=localhost;dbname=dbmafrizot1', 'root', '');
+//        $bd = new Connection('mysql:host=hina;dbname=dbmafrizot1', 'mafrizot1', 'mafrizot1');
+//        $bd->executeQuery('select * from user where identifiant = :id and mdp = :mdp', array(
+//            ':id' => array($id, PDO::PARAM_STR),
+//            ':mdp' => array($mdp, PDO::PARAM_STR)));
+//        if ($bd->getResults() == null) {
+//            $dVueEreur[] = "La combinaison identifiant, mot de passe n'est liée à aucun utilisateur";
+//            $mdp = "";
+//        }
+    }
+
+    static function val_ajout(string &$nom, string &$desc, array &$dVueEreur)
+    {
+        if (!isset($nom) || $nom == "") {
+            $dVueEreur[] = "Pas de nom";
+            $id = "";
+        }
+
+        if (!isset($desc) || $desc == "") {
+            $dVueEreur[] = "Pas de description";
+            $mdp = "";
+        }
+
+        // Ici mettre le code pour vérifier l'identifiant et le mot de passe.
+
+        if ($nom != filter_var($nom, FILTER_SANITIZE_STRING)) {
+            $dVueEreur[] = "testative d'injection de code (attaque sécurité)";
+            $id = "";
+        }
+
+        // Je comprends pas trop à quoi ça sert.
+        if ($desc != filter_var($desc, FILTER_SANITIZE_STRING)) {
+            $dVueEreur[] = "testative d'injection de code (attaque sécurité)";
             $mdp = "";
         }
     }

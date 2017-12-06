@@ -17,5 +17,6 @@ print "Je suis l'index !";
 //$cont = new ControllerConnecte();
 
 //Maintenant :
-$cont = new FrontController();
+//$cont = new FrontController();
+$cont = new ControllerConnecte();
 ?>
