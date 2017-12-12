@@ -25,21 +25,12 @@ class CtrlAdmin
                     $this->Reinit();
                     break;
 
-
                 case "ValidationConnection":
                     $this->ValidationConnection($dVueEreur);
                     break;
 
-                case "AddPublicTask":
-                    $this->AddPublicTask();
-                    break;
-
                 case "AddPrivateTask":
                     $this->AddPrivateTask();
-                    break;
-
-                case "SupprimerTachePublique" :
-                    $this->SupprimerTachePublique();
                     break;
 
                 case "SupprimerTachePrivee" :
@@ -62,8 +53,6 @@ class CtrlAdmin
             $dVueEreur[] = "Erreur inattendue!!! ";
             require($rep . $view['erreur']);
         }
-
-
 //fin
         exit(0);
     }//fin constructeur
@@ -80,21 +69,6 @@ class CtrlAdmin
         require($rep . $view['vuephp1']);
     }
 
-    function AddPublicTask()
-    {
-        $dVueEreur = array();
-        global $rep, $view;
-
-        $nom = $_POST['txtNom'];
-        $desc = $_POST['txtDesc'];
-        Validation::val_ajout($nom, $desc, $dVueEreur);
-
-        $model = new MdlTask();
-        $model->ajouterTachePublique($nom, $desc);
-
-        $this->Reinit();
-    }
-
     function AddPrivateTask()
     {
         $dVueEreur = array();
@@ -107,19 +81,6 @@ class CtrlAdmin
 
         $model = new MdlTask();
         $model->ajouterTachePrivee($nom, $desc, $user);
-
-        $this->Reinit();
-    }
-
-    function SupprimerTachePublique()
-    {
-        $dVueEreur = array();
-        global $rep, $view;
-
-        $idTache = $_POST['idTache'];
-
-        $model = new MdlTask();
-        $model->supprimerTachePublique($idTache);
 
         $this->Reinit();
     }
@@ -167,21 +128,5 @@ class CtrlAdmin
         // Il faudra appeler cette page que lorsque la connection aura échouée
         // require($rep . $view['vuephp1']);
         require($rep . $view['accueil']);
-    }
-
-    function ValidationDeconnection(array $dVueEreur)
-    {
-        global $rep, $view;
-
-//si exception, ca remonte !!!
-//        $model = new Model();
-//        $dVue = array(
-//            'id' => "",
-//            'mdp' => "",
-//            'taches' => null,
-//            'tachesCo' => null
-//        );
-        $this->Reinit();
-//        require($rep . $view['vuephp1']);
     }
 }

@@ -88,7 +88,7 @@ if (isset($dVue)) {
                     print $row['nom'] . ' : ' . $row['description'];
                     ?>
                     <input type="submit" value="Supprimer">
-                    <input type="hidden" name="idTache" value="<?php print $row['id']?>">
+                    <input type="hidden" name="idTache" value="<?php print $row['id'] ?>">
                     <input type="hidden" name="action" value="SupprimerTachePublique">
                     <?php
                     print "<BR>";
@@ -120,8 +120,8 @@ if (isset($dVue)) {
                     print $row['nom'] . ' : ' . $row['description'];
                     ?>
                     <input type="submit" value="Supprimer">
-                    <input type="hidden" name="idTache" value="<?php print $row['id']?>">
-                    <input type="hidden" name="user" value="<?php print $id?>">
+                    <input type="hidden" name="idTache" value="<?php print $row['id'] ?>">
+                    <input type="hidden" name="user" value="<?php print $id ?>">
                     <input type="hidden" name="action" value="SupprimerTachePrivee">
                     <?php
                     print "<BR>";

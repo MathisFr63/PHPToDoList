@@ -8,8 +8,10 @@
 
 class FrontController
 {
-    private $userAction = array("deconnecter", "SupprimerTachePrivee", "AddPrivateTask", "modifierPrive", "ValidationConnection", "DemandeConnection");
-    private $unknownAction = array("connecter", "supprimerPublic", "ajouterPublic", "modifierPublic");
+//    Je sais pas dans lequel mettre ValidationConnection
+    private $userAction = array("deconnecter", "SupprimerTachePrivee", "AddPrivateTask", "ValidationConnection");
+    private $unknownAction = array("AddPublicTask", "SupprimerTachePublique");
+//    Modifier tâche publique dans le unknownAction et modifier tâche privée dans le userAction
 
     function __construct()
     {
@@ -17,8 +19,6 @@ class FrontController
         try {
 //            $action = Nettoyer($_GET['Action']);
             $action = $_GET['action'];
-//            if (!isset($action))
-//                $action = "ValidationConnection";
             if (in_array($action, $this->userAction)) {
                 print "UserAction";
                 if (!MdlUser::isAdmin()) {

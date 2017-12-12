@@ -17,7 +17,9 @@ class MdlTask
 
     function get_tasks_user($login): array
     {
-        return $this->tPg->afficherTachesUser($login);
+        if ($_SESSION['role'] == 'admin') {
+            return $this->tPg->afficherTachesUser($login);
+        }
     }
 
     function ajouterTachePublique($nom, $desc)
@@ -27,7 +29,9 @@ class MdlTask
 
     function ajouterTachePrivee($nom, $desc, $user)
     {
-        $this->tPg->ajouterTachePrivee($nom, $desc, $user);
+        if ($_SESSION['role'] == 'admin') {
+            $this->tPg->ajouterTachePrivee($nom, $desc, $user);
+        }
     }
 
     function supprimerTachePublique($idTache)
@@ -37,7 +41,9 @@ class MdlTask
 
     function SupprimerTachePrivee($idTache, $user)
     {
-        $this->tPg->SupprimerTachePrivee($idTache, $user);
+        if ($_SESSION['role'] == 'admin') {
+            $this->tPg->SupprimerTachePrivee($idTache, $user);
+        }
     }
 }
 

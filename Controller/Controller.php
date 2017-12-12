@@ -30,6 +30,14 @@ class Controller
                     $this->ValidationConnection($dVueEreur);
                     break;
 
+                case "AddPublicTask":
+                    $this->AddPublicTask();
+                    break;
+
+                case "SupprimerTachePublique" :
+                    $this->SupprimerTachePublique();
+                    break;
+
 
 //mauvaise action
                 default:
@@ -89,20 +97,33 @@ class Controller
         require($rep . $view['accueil']);
     }
 
-    function ValidationDeconnection(array $dVueEreur)
-{
-    global $rep, $view;
+    function AddPublicTask()
+    {
+        $dVueEreur = array();
+        global $rep, $view;
 
-//si exception, ca remonte !!!
-//    $model = new Model();
-//    $dVue = array(
-//        'id' => "",
-//        'mdp' => "",
-//        'taches' => null
-//    );
-//    require($rep . $view['vuephp1']);
+        $nom = $_POST['txtNom'];
+        $desc = $_POST['txtDesc'];
+        Validation::val_ajout($nom, $desc, $dVueEreur);
+
+        $model = new MdlTask();
+        $model->ajouterTachePublique($nom, $desc);
+
         $this->Reinit();
-}
+    }
+
+    function SupprimerTachePublique()
+    {
+        $dVueEreur = array();
+        global $rep, $view;
+
+        $idTache = $_POST['idTache'];
+
+        $model = new MdlTask();
+        $model->supprimerTachePublique($idTache);
+
+        $this->Reinit();
+    }
 
 }//fin class
 
