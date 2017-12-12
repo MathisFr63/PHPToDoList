@@ -46,8 +46,6 @@
 <body>
 <?php
 
-var_dump($data);
-
 // on v�rifie les donn�es provenant du mod�le
 if (isset($dVue)) {
     ?>
@@ -69,37 +67,38 @@ if (isset($dVue)) {
         <?= $dVue['data'] ?>
 
         <form method="post" name="myform" id="myform">
-        <table>
-            <tr>
-                <td>Identifiant</td>
-                <td><input name="txtId" value="<?= $dVue['id'] ?>" type="text" size="20" required></td>
-            </tr>
-            <tr>
-                <td>Mot de passe</td>
-                <td><input name="txtMdp" value="<?= $dVue['mdp'] ?>" type="password" size="20" required></td>
-            </tr>
-<!--            Servira plus tard pour la page de connection-->
-<!--            <tr>-->
-<!--                <td>Confirmation</td>-->
-<!--                <td><input name="txtConfirmation" value="--><?//= $dVue['age'] ?><!--" type="password" size="3" required></td>-->
-<!--            </tr>-->
-            <tr>
-        </table>
-        <table>
-            <tr>
-                <td><input type="submit" value="Connexion"></td>
-                </td>
-            </tr>
-        </table>
+            <table>
+                <tr>
+                    <td>Identifiant</td>
+                    <td><input name="txtId" value="<?= $dVue['id'] ?>" type="text" size="20" required></td>
+                </tr>
+                <tr>
+                    <td>Mot de passe</td>
+                    <td><input name="txtMdp" value="<?= $dVue['mdp'] ?>" type="password" size="20" required></td>
+                </tr>
+                <!--            Servira plus tard pour la page de connection-->
+                <!--            <tr>-->
+                <!--                <td>Confirmation</td>-->
+                <!--                <td><input name="txtConfirmation" value="-->
+                <? //= $dVue['age'] ?><!--" type="password" size="3" required></td>-->
+                <!--            </tr>-->
+                <tr>
+            </table>
+            <table>
+                <tr>
+                    <td><input type="submit" value="Connexion"></td>
+                    </td>
+                </tr>
+            </table>
 
-        <!-- action !!!!!!!!!! -->
-        <input type="hidden" name="action" value="ValidationConnection">
-        </form></div>
+            <!-- action !!!!!!!!!! -->
+            <input type="hidden" name="action" value="ValidationConnection">
+        </form>
+    </div>
 
 <?php } else {
     print ("Attention, erreur !!<br>");
     print ("utilisation anormale de la vuephp");
 } ?>
-<p>Essayez de mettre du code html dans nom -> Correspond à une attaque de type injection</p>
 </body>
 </html>

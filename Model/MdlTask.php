@@ -12,7 +12,6 @@ class MdlTask
 
     function get_tasks_public(): array
     {
-        print "Test 2.1";
         return $this->tPg->afficherTaches();
     }
 

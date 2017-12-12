@@ -18,3 +18,8 @@ isAdmin : lit dans la session le rôle de l'utilisateur(retourne soit booléen s
 
 Voir pourquoi isAdmin ne marche pas
 Voir avec le prof comment faire en fonction de la connection dans le FC (dans le model ou dans la validation ou dans la classe FC) ?
+
+------------------------------------------------------------------------------------------------------------------------
+
+Pas compris comment se connecter : a partir du controller, comment faire en sorte d'appeler le front controler pour avoir un CtrlAdmin au lieu d'un controller simple ?
+ -> Toutes les vues doivent faire appel a index.php

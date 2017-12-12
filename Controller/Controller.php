@@ -34,13 +34,13 @@ class Controller
 //mauvaise action
                 default:
                     $dVueEreur[] = "Erreur d'appel php";
-                    require($rep . $view['vuephp1']);
+                    require($rep . $view['erreur']);
                     break;
             }
 
         } catch (PDOException $e) {
             //si erreur BD, pas le cas ici
-            $dVueEreur[] = "Erreur inattendue!!! ";
+            $dVueEreur[] = "Erreur inattendue!!! PDO";
             require($rep . $view['erreur']);
 
         } catch (Exception $e2) {
@@ -74,8 +74,8 @@ class Controller
         $mdp = $_POST['txtMdp'];
         Validation::val_form($id, $mdp, $dVueEreur);
 
-        $model = new Model();
-        $taches = $model->get_data();
+        $model = new MdlTask();
+        $taches = $model->get_tasks_public();
 
         // test pour afficher l'identifiant et le mot de passe.
         $dVue = array(

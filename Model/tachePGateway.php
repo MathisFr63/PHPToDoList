@@ -55,7 +55,6 @@ class tachePGateway
 
     public function afficherTaches() : array
     {
-        print "2.1.1";
         $this->con->executeQuery('select * from tache');
         return $this->con->getResults();
     }

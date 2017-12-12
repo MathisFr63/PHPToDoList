@@ -1,8 +1,7 @@
 <?php
 
-class ControllerConnecte
+class CtrlAdmin
 {
-
 
     function __construct()
     {
@@ -50,7 +49,7 @@ class ControllerConnecte
 //mauvaise action
                 default:
                     $dVueEreur[] = "Erreur d'appel php";
-                    require($rep . $view['vuephp1']);
+                    require($rep . $view['erreur']);
                     break;
             }
 
@@ -143,6 +142,7 @@ class ControllerConnecte
     {
         global $rep, $view;
 
+        print "Test";
 //si exception, ca remonte !!!
         $id = $_POST['txtId']; // txtId = nom du champ texte dans le formulaire contenant l'id
         $mdp = $_POST['txtMdp'];
