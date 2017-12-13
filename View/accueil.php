@@ -73,8 +73,6 @@ if (isset($dVue)) {
                 ?>
             </form>
         </div>
-<<<<<<< HEAD
-        <!-- affichage de donn�es provenant du mod�le -->
         <?= $dVue['data'] ?>
 
         <?php
@@ -103,44 +101,6 @@ if (isset($dVue)) {
                     </form>
                     <?php
                 }
-=======
-        <hr>
-        <?= $dVue['data'] ?>
-
-        <?php
-        if (isset($taches) && count($taches) > 0) {
-            foreach ($taches as $row) {
-                ?>
-                <form method="post" name="myform" id="myform">
-<<<<<<< HEAD
-=======
-                    <!-- engadget -->
->>>>>>> parent of b63d79c... Merge branch 'master' of https://github.com/MathisFr63/PHPToDoList
-                    <input name="checkFait" <?php if ($row['status'] == 1) echo 'checked'; ?> type="checkbox">
-                    <?php
-                    print $row['nom'] . ' : ' . $row['description'];
-                    ?>
-                    <input type="submit" value="Supprimer">
-                    <input type="hidden" name="idTache" value="<?php print $row['id'] ?>">
-                    <input type="hidden" name="action" value="SupprimerTachePublique">
-<<<<<<< HEAD
-                    <br>
-                </form>
-
-                <!--                <form method="post" name="myform" id="myform">-->
-<!--                    <input type="submit" value="Modifier">-->
-<!--                    <input type="hidden" name="action" value="ChangerStatusTachePublique">-->
-<!--                    <input type="hidden" name="idTache" value="--><?php //print $row['id'] ?><!--">-->
-<!--                    <input type="hidden" name="statusTache" value="--><?php //print $row['status'] ?><!--">-->
-<!--                </form>-->
-=======
-                    <?php
-                    print "<BR>";
-                    ?>
-                </form>
->>>>>>> parent of b63d79c... Merge branch 'master' of https://github.com/MathisFr63/PHPToDoList
-                <?php
->>>>>>> 8f455eb192d3d039550fde255d597710313ea5a1
             }
             ?>
             <form method="post" name="myform" id="myform">

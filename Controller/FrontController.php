@@ -8,26 +8,18 @@
  */
 class FrontController
 {
-<<<<<<< HEAD
-    private $userAction = array(NULL, "Deconnexion", "SupprimerTachePrivee", "AddPrivateTask", "AffichageTaches");
-    private $unknownAction = array(NULL, "AddPublicTask", "SupprimerTachePublique", "Connexion", "SeConnecter", "AffichageTaches", "ChangerStatusTachePublique");
-=======
-//    Je sais pas dans lequel mettre ValidationConnection
     private $userAction = array(NULL, "Deconnexion", "SupprimerTachePrivee", "AddPrivateTask", "AffichageTaches");
     private $unknownAction = array(NULL, "AddPublicTask", "SupprimerTachePublique", "Connexion", "SeConnecter", "AffichageTaches");
->>>>>>> parent of b63d79c... Merge branch 'master' of https://github.com/MathisFr63/PHPToDoList
-
-//    Modifier tâche publique dans le unknownAction et modifier tâche privée dans le userAction
+//    private $unknownAction = array(NULL, "AddPublicTask", "SupprimerTachePublique", "Connexion", "SeConnecter", "AffichageTaches", "ChangerStatusTachePublique");
 
     function __construct()
     {
-        global $rep, $view; // nécessaire pour utiliser variables globales
+        global $rep, $view;
         try {
             $action = Nettoyer::nettoyer_string($_REQUEST['action']);
             if (in_array($action, $this->userAction)) {
                 $admin = AdminModel::isAdmin();
                 if ($admin == NULL) {
-//                if (!AdminModel::isAdmin()) {
                     new Controller();
                 } else
                     new CtrlAdmin();

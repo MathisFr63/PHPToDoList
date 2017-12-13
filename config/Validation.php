@@ -39,18 +39,6 @@ class Validation
             $dVueEreur[] = "testative d'injection de code (attaque sécurité)";
             $mdp = "";
         }
-
-        // Test de récupération de la personne dans la base.
-        // Sûrement à mettre autre part !!! par exemple dans le model du FC.
-//        $bd = new Connection('mysql:host=localhost;dbname=dbmafrizot1', 'root', '');
-//        $bd = new Connection('mysql:host=hina;dbname=dbmafrizot1', 'mafrizot1', 'mafrizot1');
-//        $bd->executeQuery('select * from user where identifiant = :id and mdp = :mdp', array(
-//            ':id' => array($id, PDO::PARAM_STR),
-//            ':mdp' => array($mdp, PDO::PARAM_STR)));
-//        if ($bd->getResults() == null) {
-//            $dVueEreur[] = "La combinaison identifiant, mot de passe n'est liée à aucun utilisateur";
-//            $mdp = "";
-//        }
     }
 
     static function val_ajout(string &$nom, string &$desc, array &$dVueEreur)

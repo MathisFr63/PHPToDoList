@@ -42,15 +42,9 @@ class userGateway
 
     static function getPass($login, $mdp): bool
     {
-<<<<<<< HEAD
-        $con = new Connection('mysql:host=localhost;dbname=dbmafrizot1', 'root', '');
-//        $con = new Connection('mysql:host=hina;dbname=dbmafrizot1', 'mafrizot1', 'mafrizot1');
-=======
-        global $host, $base, $login, $mdp;
-        $con = new Connection('mysql:host='.$host.';dbname='.$base, $login, $mdp);
-        var_dump($con);
-//        $con->executeQuery('select * from user');
->>>>>>> 8f455eb192d3d039550fde255d597710313ea5a1
+        global $host, $base, $identifiant, $pass;
+        $con = new Connection('mysql:host='. $host . ';dbname='.$base, $identifiant, $pass);
+
         $con->executeQuery('select identifiant from user where identifiant = :login and mdp = :mdp',
             array(
                 ':login' => array($login, PDO::PARAM_STR),
@@ -58,7 +52,6 @@ class userGateway
             )
         );
         $tmp = $con->getResults();
-        var_dump($tmp);
         if (isset($tmp) and count($tmp) == 1) {
             return true;
         }

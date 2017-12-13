@@ -11,11 +11,6 @@ class Controller
 
         try {
             $action = $_REQUEST['action'];
-<<<<<<< HEAD
-=======
-            print "Action : " . $action . "<BR>";
-
->>>>>>> 8f455eb192d3d039550fde255d597710313ea5a1
             switch ($action) {
 
                 case NULL:
@@ -80,16 +75,11 @@ class Controller
     {
         if (isset($_POST['txtId']) && isset($_POST['txtMdp'])) {
             $user = AdminModel::seConnecter($_POST['txtId'], $_POST['txtMdp']);
-            var_dump($user);
             if ($user == NULL) {
 //            if (AdminModel::seConnecter($_POST['txtId'], $_POST['txtMdp']) == false) {
                 $erreurConnexion = true;
                 $this->Connexion();
             } else {
-<<<<<<< HEAD
-=======
-//                var_dump($user);
->>>>>>> 8f455eb192d3d039550fde255d597710313ea5a1
                 header('Location: index.php?action=AffichageTaches');
             }
         }

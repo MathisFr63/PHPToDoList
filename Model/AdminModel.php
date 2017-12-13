@@ -16,20 +16,8 @@ class AdminModel
 
     public function __construct()
     {
-<<<<<<< HEAD
-        $this->tPg = new tachePGateway(new Connection('mysql:host=localhost;dbname=dbmafrizot1', 'root', ''));
-//        $this->tPg = new tachePGateway(new Connection('mysql:host=hina;dbname=dbmafrizot1', 'mafrizot1', 'mafrizot1'));
-=======
-<<<<<<< HEAD
-        global $host, $base, $login, $mdp;
-        $this->tPg = new tachePGateway(new Connection('mysql:host='.$host.';dbname='.$base, $login, $mdp));
-=======
-//        $this->tPg = new tachePGateway(new Connection('mysql:host=localhost;dbname=dbmafrizot1', 'root', ''));
-        $this->tPg = new tachePGateway(new Connection('mysql:host=hina;dbname=dbmafrizot1', 'mafrizot1', 'mafrizot1'));
-//        $this->userG = new userGateway(new Connection('mysql:host=localhost;dbname=dbmafrizot1', 'root', ''));
-        //        $this->userG = new userGateway(new Connection('mysql:host=hina;dbname=dbmafrizot1', 'mafrizot1', 'mafrizot1'));
->>>>>>> parent of b63d79c... Merge branch 'master' of https://github.com/MathisFr63/PHPToDoList
->>>>>>> 8f455eb192d3d039550fde255d597710313ea5a1
+        global $host, $base, $identifiant, $pass;
+        $this->tPg = new tachePGateway(new Connection('mysql:host='. $host . ';dbname='.$base, $identifiant, $pass));
     }
 
 
@@ -42,20 +30,8 @@ class AdminModel
             $_SESSION['role'] = 'admin';
             return new User($login);
         }
-        return false;
+        return NULL;
     }
-
-//    public function connexion($login, $mdp): bool
-//    {
-//        session_unset();
-//        session_destroy();
-//        $login = $_POST['name'];
-//        $mdp = $_POST['mdp'];
-//        if (userGateway::getPass($login, $mdp)) {
-//            $_SESSION['role'] = 'admin';
-//            $_SESSION['login'] = $login;
-//        }
-//    }
 
     public static function deconnexion()
     {
