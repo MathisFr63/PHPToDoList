@@ -8,8 +8,14 @@
  */
 class FrontController
 {
+<<<<<<< HEAD
     private $userAction = array(NULL, "Deconnexion", "SupprimerTachePrivee", "AddPrivateTask", "AffichageTaches");
     private $unknownAction = array(NULL, "AddPublicTask", "SupprimerTachePublique", "Connexion", "SeConnecter", "AffichageTaches", "ChangerStatusTachePublique");
+=======
+//    Je sais pas dans lequel mettre ValidationConnection
+    private $userAction = array(NULL, "Deconnexion", "SupprimerTachePrivee", "AddPrivateTask", "AffichageTaches");
+    private $unknownAction = array(NULL, "AddPublicTask", "SupprimerTachePublique", "Connexion", "SeConnecter", "AffichageTaches");
+>>>>>>> parent of b63d79c... Merge branch 'master' of https://github.com/MathisFr63/PHPToDoList
 
 //    Modifier tâche publique dans le unknownAction et modifier tâche privée dans le userAction
 

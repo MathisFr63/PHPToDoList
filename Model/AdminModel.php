@@ -16,8 +16,15 @@ class AdminModel
 
     public function __construct()
     {
+<<<<<<< HEAD
         global $host, $base, $login, $mdp;
         $this->tPg = new tachePGateway(new Connection('mysql:host='.$host.';dbname='.$base, $login, $mdp));
+=======
+//        $this->tPg = new tachePGateway(new Connection('mysql:host=localhost;dbname=dbmafrizot1', 'root', ''));
+        $this->tPg = new tachePGateway(new Connection('mysql:host=hina;dbname=dbmafrizot1', 'mafrizot1', 'mafrizot1'));
+//        $this->userG = new userGateway(new Connection('mysql:host=localhost;dbname=dbmafrizot1', 'root', ''));
+        //        $this->userG = new userGateway(new Connection('mysql:host=hina;dbname=dbmafrizot1', 'mafrizot1', 'mafrizot1'));
+>>>>>>> parent of b63d79c... Merge branch 'master' of https://github.com/MathisFr63/PHPToDoList
     }
 
 

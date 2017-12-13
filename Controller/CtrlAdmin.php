@@ -24,9 +24,12 @@ class CtrlAdmin
                 case "AffichageTaches":
                     print "AffichagePrivees";
                     $this->AffichageTachesPrivees();
+<<<<<<< HEAD
 
                 case "Déconnexion":
                     $this->Deconnexion();
+=======
+>>>>>>> parent of b63d79c... Merge branch 'master' of https://github.com/MathisFr63/PHPToDoList
                     break;
 
                 case "ValidationConnection":
@@ -146,11 +149,5 @@ class CtrlAdmin
         // Il faudra appeler cette page que lorsque la connection aura échouée
         // require($rep . $view['connexion']);
         require($rep . $view['accueil']);
-    }
-
-    function Deconnexion()
-    {
-        AdminModel::deconnexion();
-        header('Location: index.php');
     }
 }

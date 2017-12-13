@@ -81,6 +81,10 @@ if (isset($dVue)) {
             foreach ($taches as $row) {
                 ?>
                 <form method="post" name="myform" id="myform">
+<<<<<<< HEAD
+=======
+                    <!-- engadget -->
+>>>>>>> parent of b63d79c... Merge branch 'master' of https://github.com/MathisFr63/PHPToDoList
                     <input name="checkFait" <?php if ($row['status'] == 1) echo 'checked'; ?> type="checkbox">
                     <?php
                     print $row['nom'] . ' : ' . $row['description'];
@@ -88,6 +92,7 @@ if (isset($dVue)) {
                     <input type="submit" value="Supprimer">
                     <input type="hidden" name="idTache" value="<?php print $row['id'] ?>">
                     <input type="hidden" name="action" value="SupprimerTachePublique">
+<<<<<<< HEAD
                     <br>
                 </form>
 
@@ -97,6 +102,12 @@ if (isset($dVue)) {
 <!--                    <input type="hidden" name="idTache" value="--><?php //print $row['id'] ?><!--">-->
 <!--                    <input type="hidden" name="statusTache" value="--><?php //print $row['status'] ?><!--">-->
 <!--                </form>-->
+=======
+                    <?php
+                    print "<BR>";
+                    ?>
+                </form>
+>>>>>>> parent of b63d79c... Merge branch 'master' of https://github.com/MathisFr63/PHPToDoList
                 <?php
             }
             ?>
