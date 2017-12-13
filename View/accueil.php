@@ -74,15 +74,13 @@ if (isset($dVue)) {
             </form>
         </div>
         <hr>
-        <!-- affichage de donn�es provenant du mod�le -->
         <?= $dVue['data'] ?>
 
         <?php
         if (isset($taches) && count($taches) > 0) {
             foreach ($taches as $row) {
                 ?>
-                <form style="float:left"; method="post" name="myform" id="myform">
-                    <!-- engadget -->
+                <form method="post" name="myform" id="myform">
                     <input name="checkFait" <?php if ($row['status'] == 1) echo 'checked'; ?> type="checkbox">
                     <?php
                     print $row['nom'] . ' : ' . $row['description'];
@@ -90,16 +88,15 @@ if (isset($dVue)) {
                     <input type="submit" value="Supprimer">
                     <input type="hidden" name="idTache" value="<?php print $row['id'] ?>">
                     <input type="hidden" name="action" value="SupprimerTachePublique">
-                    <?php
-                    print "<BR>";
-                    ?>
+                    <br>
                 </form>
-                <form method="post" name="myform" id="myform">
-                    <input type="submit" value="Modifier">
-                    <input type="hidden" name="action" value="ChangerStatusTachePublique">
-                    <input type="hidden" name="idTache" value="<?php print $row['id'] ?>">
-                    <input type="hidden" name="statusTache" value="<?php print $row['status'] ?>">
-                </form>
+
+                <!--                <form method="post" name="myform" id="myform">-->
+<!--                    <input type="submit" value="Modifier">-->
+<!--                    <input type="hidden" name="action" value="ChangerStatusTachePublique">-->
+<!--                    <input type="hidden" name="idTache" value="--><?php //print $row['id'] ?><!--">-->
+<!--                    <input type="hidden" name="statusTache" value="--><?php //print $row['status'] ?><!--">-->
+<!--                </form>-->
                 <?php
             }
             ?>

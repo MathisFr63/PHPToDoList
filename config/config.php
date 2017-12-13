@@ -11,14 +11,15 @@ $rep=__DIR__.'/../';
 
 //BD
 
-//$base="sasa";
-//$login="";
-//$mdp="";
+// $host='hina';
+// $base='dbmafrizot1';
+// $login='mafrizot1';
+// $mdp='mafrizot1';
 
- $host='hina';
- $base='dbmafrizot1';
- $login='mafrizot1';
- $mdp='mafrizot1';
+$host='localhost';
+$base='dbmafrizot1';
+$login='root';
+$mdp='';
 
 //Vues
 

@@ -5,32 +5,22 @@ class Controller
 
     function __construct()
     {
-        global $rep, $view; // nécessaire pour utiliser variables globales
-// on démarre ou reprend la session si necessaire (préférez utiliser un modèle pour gérer vos session ou cookies)
-        session_start();
+        global $rep, $view;
 
-
-//debut
-
-//on initialise un tableau d'erreur
         $dVueEreur = array();
 
         try {
             $action = $_REQUEST['action'];
             print "Action : " . $action . "<BR>";
+
             switch ($action) {
 
-//pas d'action, on r�initialise 1er appel
                 case NULL:
                     $this->AffichageTaches($dVueEreur);
                     break;
 
                 case "AffichageTaches":
                     $this->AffichageTaches($dVueEreur);
-                    break;
-
-                case "Deconnexion":
-                    // A faire
                     break;
 
                 case "Connexion" :
@@ -53,7 +43,6 @@ class Controller
                     $this->changerStatusTachePublique();
                     break;
 
-//mauvaise action
                 default:
                     $dVueEreur[] = "Erreur d'appel php";
                     require($rep . $view['erreur']);
@@ -84,21 +73,20 @@ class Controller
             'mdp' => "",
             'taches' => ""
         );
-        print "Login : " . $_SESSION['login'];
         require($rep . $view['connexion']);
     }
 
     protected function SeConnecter() : void
     {
-        global $rep, $view;
         if (isset($_POST['txtId']) && isset($_POST['txtMdp'])) {
             $user = AdminModel::seConnecter($_POST['txtId'], $_POST['txtMdp']);
+            var_dump($user);
             if ($user == NULL) {
-//            if (AdminModel::seConnecter($_POST['txtId'], $_POST['txtMdp']) == NULL) {
+//            if (AdminModel::seConnecter($_POST['txtId'], $_POST['txtMdp']) == false) {
                 $erreurConnexion = true;
                 $this->Connexion();
             } else {
-                var_dump($user);
+//                var_dump($user);
                 header('Location: index.php?action=AffichageTaches');
             }
         }

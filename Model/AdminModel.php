@@ -17,26 +17,20 @@ class AdminModel
     public function __construct()
     {
         global $host, $base, $login, $mdp;
-//        $this->tPg = new tachePGateway(new Connection('mysql:host=localhost;dbname=dbmafrizot1', 'root', ''));
         $this->tPg = new tachePGateway(new Connection('mysql:host='.$host.';dbname='.$base, $login, $mdp));
-//        $this->userG = new userGateway(new Connection('mysql:host=localhost;dbname=dbmafrizot1', 'root', ''));
-        //        $this->userG = new userGateway(new Connection('mysql:host=hina;dbname=dbmafrizot1', 'mafrizot1', 'mafrizot1'));
     }
 
 
     public static function seConnecter($login, $mdp)
     {
         $login = Nettoyer::nettoyer_string($login);
-//        $_SESSION['login'] = $login;
         $mdp = Nettoyer::nettoyer_string($mdp);
         if (userGateway::getPass($login, $mdp)) {
             $_SESSION['login'] = $login;
             $_SESSION['role'] = 'admin';
             return new User($login);
-//            return true;
         }
-        return NULL;
-//        return false;
+        return false;
     }
 
 //    public function connexion($login, $mdp): bool
