@@ -53,6 +53,21 @@ class tachePGateway
         ));
     }
 
+    public function changerStatusTachePublique($id, $fait)
+    {
+        if ($fait = 1){
+            $status = 0;
+        }
+        else{
+            $status = 1;
+        }
+
+        $this->executeQuery("update tache set status = :status where id = :id", array(
+            ':id' => array($id, PDO::PARAM_INT),
+            ':status' => array($status, PDO::PARAM_INT)
+        ));
+    }
+
     public function afficherTaches() : array
     {
         $this->con->executeQuery('select * from tache');

@@ -46,6 +46,9 @@ class Controller
                     $this->SupprimerTachePublique();
                     break;
 
+                case "ChangerStatusTachePublique" :
+                    $this->changerStatusTachePublique();
+                    break;
 
 //mauvaise action
                 default:
@@ -148,6 +151,18 @@ class Controller
 
         $model = new TacheModel();
         $model->supprimerTachePublique($idTache);
+
+        $this->Reinit();
+    }
+
+    function changerStatusTachePublique()
+    {
+        $dVueEreur = array();
+        $idTache = $_POST['idTache'];
+        $statusTache = $_POST['statusTache'];
+
+        $model = new TacheModel();
+        $model->changerStatusTachePublique($idTache, $statusTache);
 
         $this->Reinit();
     }

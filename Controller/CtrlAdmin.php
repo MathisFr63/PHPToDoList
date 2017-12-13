@@ -25,7 +25,11 @@ class CtrlAdmin
                     $this->Reinit();
                     break;
 
-                case AffichageTachesPrivees:
+                case "Déconnexion":
+                    $this->Deconnexion();
+                    break;
+
+                case "AffichageTachesPrivees":
                     $this->AffichageTachesPrivees($dVueEreur);
                     break;
 
@@ -155,5 +159,11 @@ class CtrlAdmin
         // Il faudra appeler cette page que lorsque la connection aura échouée
         // require($rep . $view['connexion']);
         require($rep . $view['accueil']);
+    }
+
+    function Deconnexion()
+    {
+        AdminModel::deconnexion();
+        header('Location: index.php');
     }
 }

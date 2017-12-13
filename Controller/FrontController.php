@@ -10,7 +10,7 @@ class FrontController
 {
 //    Je sais pas dans lequel mettre ValidationConnection
     private $userAction = array(NULL, "deconnecter", "SupprimerTachePrivee", "AddPrivateTask", "AffichageTachesPrivees");
-    private $unknownAction = array(NULL, "AddPublicTask", "SupprimerTachePublique", "Connexion", "SeConnecter", "AffichageTaches");
+    private $unknownAction = array(NULL, "AddPublicTask", "SupprimerTachePublique", "Connexion", "SeConnecter", "AffichageTaches", "ChangerStatusTachePublique");
 
 //    Modifier tâche publique dans le unknownAction et modifier tâche privée dans le userAction
 
