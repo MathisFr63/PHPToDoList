@@ -63,12 +63,12 @@ if (isset($dVue)) {
                 if (isset($tachesCo)) {
                     ?>
                     <input type="submit" value="Deconnexion">
-                    <input type="hidden" name="action" value="ValidationDeconnection">
+                    <input type="hidden" name="action" value="Deconnexion">
                     <?php
                 } else {
                     ?>
                     <input type="submit" value="Connexion">
-                    <input type="hidden" name="action" value="ValidationConnection">
+                    <input type="hidden" name="action" value="Connexion">
                 <?php }
                 ?>
             </form>

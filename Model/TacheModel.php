@@ -1,6 +1,6 @@
 <?php
 
-class MdlTask
+class TacheModel
 {
     private $tPg;
 

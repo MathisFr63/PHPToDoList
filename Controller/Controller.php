@@ -17,7 +17,7 @@ class Controller
 
         try {
             $action = $_REQUEST['action'];
-
+            print "<BR>Action : " . $action;
             switch ($action) {
 
 //pas d'action, on r�initialise 1er appel
@@ -26,8 +26,16 @@ class Controller
                     break;
 
 
-                case "ValidationConnection":
-                    $this->ValidationConnection($dVueEreur);
+                case "AffichageTaches":
+                    $this->AffichageTaches($dVueEreur);
+                    break;
+
+                case "Connexion" :
+                    $this->Reinit();
+                    break;
+
+                case "SeConnecter" :
+                    $this->SeConnecter();
                     break;
 
                 case "AddPublicTask":
@@ -62,6 +70,30 @@ class Controller
     }//fin constructeur
 
 
+    protected function Connexion() : void {
+        global $rep,$views;
+        print "Je suis dans la connexion";
+        $dVue = array(
+            'id' => "",
+            'mdp' => "",
+            'taches' => ""
+        );
+        require($rep . $views['connexion']);
+    }
+
+    protected function SeConnecter() : void {
+        global $rep,$views;
+        if(isset($_POST['txtId']) && isset($_POST['txtMdp'])){
+            if(AdminModel::seConnecter($_POST['txtId'], $_POST['txtMdp']) == false) {
+                $erreurConnexion=true;
+                require($rep . $views['connexion']);
+            }
+            else
+                // À modifier
+                header('Location: index.php?action=AfficherTaches');
+        }
+    }
+
     function Reinit()
     {
         global $rep, $view; // nécessaire pour utiliser variables globales
@@ -70,30 +102,21 @@ class Controller
             'mdp' => "",
             'taches' => ""
         );
-        require($rep . $view['vuephp1']);
+        require($rep . $view['accueil']);
     }
 
-    function ValidationConnection(array $dVueEreur)
+    function AffichageTaches(array $dVueEreur)
     {
         global $rep, $view;
 
-//si exception, ca remonte !!!
-        $id = $_POST['txtId']; // txtId = nom du champ texte dans le formulaire contenant l'id
-        $mdp = $_POST['txtMdp'];
-        Validation::val_form($id, $mdp, $dVueEreur);
-
-        $model = new MdlTask();
+        $model = new TacheModel();
         $taches = $model->get_tasks_public();
-
-        // test pour afficher l'identifiant et le mot de passe.
         $dVue = array(
-            'id' => $id,
-            'mdp' => $mdp,
             'taches' => $taches
         );
 
         // Il faudra appeler cette page que lorsque la connection aura échouée
-        // require($rep . $view['vuephp1']);
+        // require($rep . $view['Connexion']);
         require($rep . $view['accueil']);
     }
 
@@ -106,7 +129,7 @@ class Controller
         $desc = $_POST['txtDesc'];
         Validation::val_ajout($nom, $desc, $dVueEreur);
 
-        $model = new MdlTask();
+        $model = new TacheModel();
         $model->ajouterTachePublique($nom, $desc);
 
         $this->Reinit();
@@ -119,7 +142,7 @@ class Controller
 
         $idTache = $_POST['idTache'];
 
-        $model = new MdlTask();
+        $model = new TacheModel();
         $model->supprimerTachePublique($idTache);
 
         $this->Reinit();

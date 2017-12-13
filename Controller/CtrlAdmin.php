@@ -66,7 +66,7 @@ class CtrlAdmin
             'nom' => "",
             'age' => 0,
         );
-        require($rep . $view['vuephp1']);
+        require($rep . $view['connexion']);
     }
 
     function AddPrivateTask()
@@ -79,7 +79,7 @@ class CtrlAdmin
         $user = $_POST['user'];
         Validation::val_addPrivate($nom, $desc, $user, $dVueEreur);
 
-        $model = new MdlTask();
+        $model = new TacheModel();
         $model->ajouterTachePrivee($nom, $desc, $user);
 
         $this->Reinit();
@@ -93,7 +93,7 @@ class CtrlAdmin
         $idTache = $_POST['idTache'];
         $user = $_POST['user'];
 
-        $model = new MdlTask();
+        $model = new TacheModel();
         $model->SupprimerTachePrivee($idTache, $user);
 
         $this->Reinit();
@@ -109,7 +109,7 @@ class CtrlAdmin
         $mdp = $_POST['txtMdp'];
         Validation::val_form($id, $mdp, $dVueEreur);
 
-        $model = new MdlTask();
+        $model = new TacheModel();
         $taches = $model->get_tasks_public();
 
         $tachesCo = $model->get_tasks_user($id);
@@ -126,7 +126,7 @@ class CtrlAdmin
         );
 
         // Il faudra appeler cette page que lorsque la connection aura échouée
-        // require($rep . $view['vuephp1']);
+        // require($rep . $view['connexion']);
         require($rep . $view['accueil']);
     }
 }

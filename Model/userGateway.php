@@ -43,10 +43,16 @@ class userGateway
     static function getPass($login, $mdp): bool
     {
         $con = new Connection('mysql:host=localhost;dbname=dbmafrizot1', 'root', '');
-        $con->executeQuery('select count(1) from user where login = :login and mdp = :mdp', array(':login' => array($login, PDO::PARAM_STR), ':mdp' => array($mdp, PDO::PARAM_STR)));
+        $con->executeQuery('select identifiant from user where identifiant = :login and mdp = :mdp',
+            array(
+                ':login' => array($login, PDO::PARAM_STR),
+                ':mdp' => array($mdp, PDO::PARAM_STR)
+            )
+        );
         $tmp = $con->getResults();
-        if (isset($tmp) and $tmp == 1)
+        if (isset($tmp) and count($tmp) == 1) {
             return true;
+        }
         return false;
     }
 }
