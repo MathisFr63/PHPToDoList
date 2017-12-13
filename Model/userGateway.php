@@ -42,7 +42,8 @@ class userGateway
 
     static function getPass($login, $mdp): bool
     {
-        $con = new Connection('mysql:host=localhost;dbname=dbmafrizot1', 'root', '');
+//        $con = new Connection('mysql:host=localhost;dbname=dbmafrizot1', 'root', '');
+        $con = new Connection('mysql:host=hina;dbname=dbmafrizot1', 'mafrizot1', 'mafrizot1');
         $con->executeQuery('select identifiant from user where identifiant = :login and mdp = :mdp',
             array(
                 ':login' => array($login, PDO::PARAM_STR),

@@ -9,7 +9,7 @@
 class FrontController
 {
 //    Je sais pas dans lequel mettre ValidationConnection
-    private $userAction = array(NULL, "deconnecter", "SupprimerTachePrivee", "AddPrivateTask");
+    private $userAction = array(NULL, "deconnecter", "SupprimerTachePrivee", "AddPrivateTask", "AffichageTachesPrivees");
     private $unknownAction = array(NULL, "AddPublicTask", "SupprimerTachePublique", "Connexion", "SeConnecter", "AffichageTaches");
 
 //    Modifier tâche publique dans le unknownAction et modifier tâche privée dans le userAction
@@ -20,7 +20,6 @@ class FrontController
         try {
             $action = Nettoyer::nettoyer_string($_REQUEST['action']);
             // Test pour afficher l'action demandée
-            print $action;
 //            $action = Nettoyer($_GET['Action']);
 //            $action = $_GET['action'];
             if (in_array($action, $this->userAction)) {

@@ -25,6 +25,10 @@ class CtrlAdmin
                     $this->Reinit();
                     break;
 
+                case AffichageTachesPrivees:
+                    $this->AffichageTachesPrivees($dVueEreur);
+                    break;
+
                 case "ValidationConnection":
                     $this->ValidationConnection($dVueEreur);
                     break;
@@ -67,6 +71,29 @@ class CtrlAdmin
             'age' => 0,
         );
         require($rep . $view['connexion']);
+    }
+
+    function AffichageTachesPrivees(array $dVueEreur)
+    {
+        global $rep, $view;
+
+        print "Test";
+        $id = $_SESSION['login'];
+
+        $model = new TacheModel();
+        $taches = $model->get_tasks_public();
+        print "Test connexion";
+        $tachesCo = $model->get_tasks_user($id);
+
+        print count($tachesCo);
+
+        $dVue = array(
+            'id' => $id,
+            'taches' => $taches,
+            'tachesCo' => $tachesCo
+        );
+
+        require($rep . $view['accueil']);
     }
 
     function AddPrivateTask()

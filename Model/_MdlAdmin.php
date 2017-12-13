@@ -14,7 +14,8 @@ class MdlAdmin
 
     public function __construct()
     {
-        $this->tPg = new tacheGateway(new Connection('mysql:host=localhost;dbname=dbmafrizot1', 'root', ''));
+//        $this->tPg = new tacheGateway(new Connection('mysql:host=localhost;dbname=dbmafrizot1', 'root', ''));
+        $this->tPg = new tacheGateway(new Connection('mysql:host=hina;dbname=dbmafrizot1', 'mafrizot1', 'mafrizot1'));
     }
 //
 //    function get_data() : array

@@ -22,7 +22,7 @@ class Controller
 
 //pas d'action, on r�initialise 1er appel
                 case NULL:
-                    $this->Reinit();
+                    $this->Connexion();
                     break;
 
 
@@ -31,7 +31,7 @@ class Controller
                     break;
 
                 case "Connexion" :
-                    $this->Reinit();
+                    $this->Connexion();
                     break;
 
                 case "SeConnecter" :
@@ -71,36 +71,40 @@ class Controller
 
 
     protected function Connexion() : void {
-        global $rep,$views;
-        print "Je suis dans la connexion";
+        global $rep,$view;
+        print "<BR>Je suis dans la connexion";
         $dVue = array(
             'id' => "",
             'mdp' => "",
             'taches' => ""
         );
-        require($rep . $views['connexion']);
+        require($rep . $view['connexion']);
     }
 
     protected function SeConnecter() : void {
-        global $rep,$views;
+        global $rep,$view;
         if(isset($_POST['txtId']) && isset($_POST['txtMdp'])){
             if(AdminModel::seConnecter($_POST['txtId'], $_POST['txtMdp']) == false) {
                 $erreurConnexion=true;
-                require($rep . $views['connexion']);
+                require($rep . $view['connexion']);
             }
             else
                 // À modifier
-                header('Location: index.php?action=AfficherTaches');
+                header('Location: index.php?action=AffichageTaches');
         }
     }
 
     function Reinit()
     {
         global $rep, $view; // nécessaire pour utiliser variables globales
+
+        $model = new TacheModel();
+        $taches = $model->get_tasks_public();
+
         $dVue = array(
             'id' => "",
             'mdp' => "",
-            'taches' => ""
+            'taches' => $taches
         );
         require($rep . $view['accueil']);
     }

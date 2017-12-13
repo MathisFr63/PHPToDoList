@@ -15,7 +15,8 @@ class MdlFC
 
     public function __construct()
     {
-        $this->bd = new Connection('mysql:host=localhost;dbname=dbmafrizot1', 'root', '');
+//        $this->bd = new Connection('mysql:host=localhost;dbname=dbmafrizot1', 'root', '');
+        $this->bd = new Connection('mysql:host=hina;dbname=dbmafrizot1', 'mafrizot1', 'mafrizot1');
         $this->tg = new tacheGateway($this->bd);
     }
 

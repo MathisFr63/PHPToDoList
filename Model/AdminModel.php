@@ -28,8 +28,8 @@ class AdminModel
 
     public function __construct()
     {
-        $this->tPg = new tachePGateway(new Connection('mysql:host=localhost;dbname=dbmafrizot1', 'root', ''));
-//        $this->tPg = new tachePGateway(new Conn   ection('mysql:host=hina;dbname=dbmafrizot1', 'mafrizot1', 'mafrizot1'));
+//        $this->tPg = new tachePGateway(new Connection('mysql:host=localhost;dbname=dbmafrizot1', 'root', ''));
+        $this->tPg = new tachePGateway(new Connection('mysql:host=hina;dbname=dbmafrizot1', 'mafrizot1', 'mafrizot1'));
 //        $this->userG = new userGateway(new Connection('mysql:host=localhost;dbname=dbmafrizot1', 'root', ''));
         //        $this->userG = new userGateway(new Connection('mysql:host=hina;dbname=dbmafrizot1', 'mafrizot1', 'mafrizot1'));
     }
