@@ -5,31 +5,25 @@ class Controller
 
     function __construct()
     {
-        global $rep, $view; // nécessaire pour utiliser variables globales
-// on démarre ou reprend la session si necessaire (préférez utiliser un modèle pour gérer vos session ou cookies)
-        session_start();
+        global $rep, $view;
 
-
-//debut
-
-//on initialise un tableau d'erreur
         $dVueEreur = array();
 
         try {
             $action = $_REQUEST['action'];
+<<<<<<< HEAD
+=======
+            print "Action : " . $action . "<BR>";
+
+>>>>>>> 8f455eb192d3d039550fde255d597710313ea5a1
             switch ($action) {
 
-//pas d'action, on r�initialise 1er appel
                 case NULL:
                     $this->AffichageTaches($dVueEreur);
                     break;
 
                 case "AffichageTaches":
                     $this->AffichageTaches($dVueEreur);
-                    break;
-
-                case "Deconnexion":
-                    // A faire
                     break;
 
                 case "Connexion" :
@@ -49,7 +43,6 @@ class Controller
                     break;
 
 
-//mauvaise action
                 default:
                     $dVueEreur[] = "Erreur d'appel php";
                     require($rep . $view['erreur']);
@@ -85,14 +78,18 @@ class Controller
 
     protected function SeConnecter(): void
     {
-        global $rep, $view;
         if (isset($_POST['txtId']) && isset($_POST['txtMdp'])) {
             $user = AdminModel::seConnecter($_POST['txtId'], $_POST['txtMdp']);
+            var_dump($user);
             if ($user == NULL) {
-//            if (AdminModel::seConnecter($_POST['txtId'], $_POST['txtMdp']) == NULL) {
+//            if (AdminModel::seConnecter($_POST['txtId'], $_POST['txtMdp']) == false) {
                 $erreurConnexion = true;
                 $this->Connexion();
             } else {
+<<<<<<< HEAD
+=======
+//                var_dump($user);
+>>>>>>> 8f455eb192d3d039550fde255d597710313ea5a1
                 header('Location: index.php?action=AffichageTaches');
             }
         }

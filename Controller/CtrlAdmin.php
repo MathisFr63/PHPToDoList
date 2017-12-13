@@ -6,17 +6,13 @@ class CtrlAdmin
     function __construct()
     {
         global $rep, $view; // nécessaire pour utiliser variables globales
-// on démarre ou reprend la session si necessaire (préférez utiliser un modèle pour gérer vos session ou cookies)
-        session_start();
 
 
-//debut
-
-//on initialise un tableau d'erreur
         $dVueEreur = array();
 
         try {
             $action = $_REQUEST['action'];
+            print "Action : " . $action . "<BR>";
 
             switch ($action) {
 
@@ -27,6 +23,12 @@ class CtrlAdmin
 
                 case "AffichageTaches":
                     $this->AffichageTachesPrivees();
+<<<<<<< HEAD
+
+                case "Déconnexion":
+                    $this->Deconnexion();
+=======
+>>>>>>> parent of b63d79c... Merge branch 'master' of https://github.com/MathisFr63/PHPToDoList
                     break;
 
                 case "Deconnexion":
@@ -124,7 +126,6 @@ class CtrlAdmin
     {
         global $rep, $view;
 
-        print "Test";
 //si exception, ca remonte !!!
         $id = $_POST['txtId']; // txtId = nom du champ texte dans le formulaire contenant l'id
         $mdp = $_POST['txtMdp'];
@@ -135,10 +136,6 @@ class CtrlAdmin
 
         $tachesCo = $model->get_tasks_user($id);
 
-        // Affiche le nombre de tâches privées.
-        print count($tachesCo);
-
-        // test pour afficher l'identifiant et le mot de passe.
         $dVue = array(
             'id' => $id,
             'mdp' => $mdp,
