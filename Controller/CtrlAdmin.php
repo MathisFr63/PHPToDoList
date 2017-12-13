@@ -22,11 +22,12 @@ class CtrlAdmin
 
 //pas d'action, on r�initialise 1er appel
                 case NULL:
-                    $this->Reinit();
+                    $this->AffichageTachesPrivees();
                     break;
 
-                case AffichageTachesPrivees:
-                    $this->AffichageTachesPrivees($dVueEreur);
+                case "AffichageTaches":
+                    print "AffichagePrivees";
+                    $this->AffichageTachesPrivees();
                     break;
 
                 case "ValidationConnection":
@@ -73,19 +74,15 @@ class CtrlAdmin
         require($rep . $view['connexion']);
     }
 
-    function AffichageTachesPrivees(array $dVueEreur)
+    function AffichageTachesPrivees()
     {
         global $rep, $view;
 
-        print "Test";
         $id = $_SESSION['login'];
 
         $model = new TacheModel();
         $taches = $model->get_tasks_public();
-        print "Test connexion";
         $tachesCo = $model->get_tasks_user($id);
-
-        print count($tachesCo);
 
         $dVue = array(
             'id' => $id,

@@ -1,15 +1,15 @@
 <?php
+
 /**
  * Created by PhpStorm.
  * User: Mathis
  * Date: 06/12/2017
  * Time: 10:21
  */
-
 class FrontController
 {
 //    Je sais pas dans lequel mettre ValidationConnection
-    private $userAction = array(NULL, "deconnecter", "SupprimerTachePrivee", "AddPrivateTask", "AffichageTachesPrivees");
+    private $userAction = array(NULL, "Deconnexion", "SupprimerTachePrivee", "AddPrivateTask", "AffichageTaches");
     private $unknownAction = array(NULL, "AddPublicTask", "SupprimerTachePublique", "Connexion", "SeConnecter", "AffichageTaches");
 
 //    Modifier tâche publique dans le unknownAction et modifier tâche privée dans le userAction
@@ -19,17 +19,17 @@ class FrontController
         global $rep, $view; // nécessaire pour utiliser variables globales
         try {
             $action = Nettoyer::nettoyer_string($_REQUEST['action']);
-            // Test pour afficher l'action demandée
-//            $action = Nettoyer($_GET['Action']);
-//            $action = $_GET['action'];
             if (in_array($action, $this->userAction)) {
-                print "UserAction";
-                if (!AdminModel::isAdmin()) {
+                print "UserAction<BR>";
+                $admin = AdminModel::isAdmin();
+                print "Admin ? " . (isset($admin)?"OUI":"NON") . "<BR>";
+                if ($admin == NULL) {
+//                if (!AdminModel::isAdmin()) {
                     new Controller();
                 } else
                     new CtrlAdmin();
             } else if (in_array($action, $this->unknownAction)) {
-                print "UnknownAction";
+                print "UnknownAction<BR>";
                 new Controller();
             } else {
                 $dVueEreur[] = "Action Inconnue";

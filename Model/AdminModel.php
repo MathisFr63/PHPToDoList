@@ -1,11 +1,11 @@
 <?php
+
 /**
  * Created by PhpStorm.
  * User: Mathis
  * Date: 12/5/2017
  * Time: 7:50 PM
  */
-
 class AdminModel
 {
     private $tPg;
@@ -14,24 +14,28 @@ class AdminModel
     private $id;
     private $admin = false;
 
-
-    public static function seConnecter($login, $mdp) : bool {
-        $login=Nettoyer::nettoyer_string($login);
-        $mdp=Nettoyer::nettoyer_string($mdp);
-        if (userGateway::getPass($login, $mdp)) {
-            $_SESSION['role'] = 'admin';
-            $_SESSION['login'] = $login;
-            return true;
-        }
-        return false;
-    }
-
     public function __construct()
     {
 //        $this->tPg = new tachePGateway(new Connection('mysql:host=localhost;dbname=dbmafrizot1', 'root', ''));
         $this->tPg = new tachePGateway(new Connection('mysql:host=hina;dbname=dbmafrizot1', 'mafrizot1', 'mafrizot1'));
 //        $this->userG = new userGateway(new Connection('mysql:host=localhost;dbname=dbmafrizot1', 'root', ''));
         //        $this->userG = new userGateway(new Connection('mysql:host=hina;dbname=dbmafrizot1', 'mafrizot1', 'mafrizot1'));
+    }
+
+
+    public static function seConnecter($login, $mdp)
+    {
+        $login = Nettoyer::nettoyer_string($login);
+//        $_SESSION['login'] = $login;
+        $mdp = Nettoyer::nettoyer_string($mdp);
+        if (userGateway::getPass($login, $mdp)) {
+            $_SESSION['login'] = $login;
+            $_SESSION['role'] = 'admin';
+            return new User($login);
+//            return true;
+        }
+        return NULL;
+//        return false;
     }
 
 //    public function connexion($login, $mdp): bool
@@ -46,20 +50,18 @@ class AdminModel
 //        }
 //    }
 
-    public function deconnexion()
+    public static function deconnexion()
     {
         session_unset();
         session_destroy();
         $_SESSION = array();
     }
 
-    public function isAdmin()
-    {
-        if (isset($_SESSION['login']) && isset($_SESSION['role'])) {
-            $login = Nettoyer::nettoyer_string($_SESSION['login']);
-            $role = Nettoyer::nettoyer - string($_SESSION['role']);
-            return new User($login, $role);
-        } else
+
+    public static function isAdmin() {
+        if(isset($_SESSION['login']) && isset($_SESSION['role']))
+            return new User(Nettoyer::nettoyer_string($_SESSION['login']));
+        else
             return null;
     }
 

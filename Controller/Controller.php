@@ -17,17 +17,20 @@ class Controller
 
         try {
             $action = $_REQUEST['action'];
-            print "<BR>Action : " . $action;
+            print "Action : " . $action . "<BR>";
             switch ($action) {
 
 //pas d'action, on r�initialise 1er appel
                 case NULL:
-                    $this->Connexion();
+                    $this->AffichageTaches($dVueEreur);
                     break;
-
 
                 case "AffichageTaches":
                     $this->AffichageTaches($dVueEreur);
+                    break;
+
+                case "Deconnexion":
+                    // A faire
                     break;
 
                 case "Connexion" :
@@ -70,27 +73,31 @@ class Controller
     }//fin constructeur
 
 
-    protected function Connexion() : void {
-        global $rep,$view;
-        print "<BR>Je suis dans la connexion";
+    protected function Connexion() : void
+    {
+        global $rep, $view;
         $dVue = array(
             'id' => "",
             'mdp' => "",
             'taches' => ""
         );
+        print "Login : " . $_SESSION['login'];
         require($rep . $view['connexion']);
     }
 
-    protected function SeConnecter() : void {
-        global $rep,$view;
-        if(isset($_POST['txtId']) && isset($_POST['txtMdp'])){
-            if(AdminModel::seConnecter($_POST['txtId'], $_POST['txtMdp']) == false) {
-                $erreurConnexion=true;
-                require($rep . $view['connexion']);
-            }
-            else
-                // À modifier
+    protected function SeConnecter() : void
+    {
+        global $rep, $view;
+        if (isset($_POST['txtId']) && isset($_POST['txtMdp'])) {
+            $user = AdminModel::seConnecter($_POST['txtId'], $_POST['txtMdp']);
+            if ($user == NULL) {
+//            if (AdminModel::seConnecter($_POST['txtId'], $_POST['txtMdp']) == NULL) {
+                $erreurConnexion = true;
+                $this->Connexion();
+            } else {
+                var_dump($user);
                 header('Location: index.php?action=AffichageTaches');
+            }
         }
     }
 
