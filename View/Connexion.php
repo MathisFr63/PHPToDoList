@@ -61,12 +61,12 @@ if (isset($dVue)) {
         }
         ?>
 
-        <h2>Connexion</h2>
+        <h1>Connexion</h1>
         <hr>
         <!-- affichage de donn�es provenant du mod�le -->
         <?= $dVue['data'] ?>
 
-        <form method="post" name="myform" id="myform" action="index.php?action=SeConnecter">
+        <form style="border: black 1px solid; border-radius: 10px; background: #717670; display: inline-block; padding: 20" method="post" name="myform" id="myform" action="index.php?action=SeConnecter">
             <table>
                 <tr>
                     <td>Identifiant</td>

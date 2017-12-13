@@ -26,8 +26,11 @@ class CtrlAdmin
                     break;
 
                 case "AffichageTaches":
-                    print "AffichagePrivees";
                     $this->AffichageTachesPrivees();
+                    break;
+
+                case "Deconnexion":
+                    $this->Deconnexion();
                     break;
 
                 case "ValidationConnection":
@@ -65,13 +68,7 @@ class CtrlAdmin
 
     function Reinit()
     {
-        global $rep, $view; // nécessaire pour utiliser variables globales
-
-        $dVue = array(
-            'nom' => "",
-            'age' => 0,
-        );
-        require($rep . $view['connexion']);
+        header('Location: index.php?action=AffichageTaches');
     }
 
     function AffichageTachesPrivees()
@@ -152,5 +149,11 @@ class CtrlAdmin
         // Il faudra appeler cette page que lorsque la connection aura échouée
         // require($rep . $view['connexion']);
         require($rep . $view['accueil']);
+    }
+
+    function Deconnexion()
+    {
+        AdminModel::deconnexion();
+        header('Location: index.php');
     }
 }

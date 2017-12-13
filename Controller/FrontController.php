@@ -20,16 +20,13 @@ class FrontController
         try {
             $action = Nettoyer::nettoyer_string($_REQUEST['action']);
             if (in_array($action, $this->userAction)) {
-                print "UserAction<BR>";
                 $admin = AdminModel::isAdmin();
-                print "Admin ? " . (isset($admin)?"OUI":"NON") . "<BR>";
                 if ($admin == NULL) {
 //                if (!AdminModel::isAdmin()) {
                     new Controller();
                 } else
                     new CtrlAdmin();
             } else if (in_array($action, $this->unknownAction)) {
-                print "UnknownAction<BR>";
                 new Controller();
             } else {
                 $dVueEreur[] = "Action Inconnue";

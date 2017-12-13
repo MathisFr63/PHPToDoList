@@ -57,7 +57,7 @@ if (isset($dVue)) {
     } else {
         ?>
         <div>
-            <h2 style="display: inline-block;" align="center">Les tâches</h2>
+            <h1 align="center">Les tâches</h1>
             <form style="float: right;" method="post" name="myform" id="myform">
                 <?php
                 if (isset($tachesCo)) {
@@ -73,28 +73,35 @@ if (isset($dVue)) {
                 ?>
             </form>
         </div>
-        <hr>
         <!-- affichage de donn�es provenant du mod�le -->
         <?= $dVue['data'] ?>
 
         <?php
-        if (isset($taches) && count($taches) > 0) {
-            foreach ($taches as $row) {
-                ?>
-                <form method="post" name="myform" id="myform">
-                    <!-- engadget -->
-                    <input name="checkFait" <?php if ($row['status'] == 1) echo 'checked'; ?> type="checkbox">
-                    <?php
-                    print $row['nom'] . ' : ' . $row['description'];
+        if (isset($taches)) {
+            ?>
+            <br><br>
+            <h2 align="center"> Tâches publiques </h2>
+            <hr>
+            <?php
+            if (count($taches) > 0) {
+
+                foreach ($taches as $row) {
                     ?>
-                    <input type="submit" value="Supprimer">
-                    <input type="hidden" name="idTache" value="<?php print $row['id'] ?>">
-                    <input type="hidden" name="action" value="SupprimerTachePublique">
+                    <form method="post" name="myform" id="myform">
+                        <!-- engadget -->
+                        <input name="checkFait" <?php if ($row['status'] == 1) echo 'checked'; ?> type="checkbox">
+                        <?php
+                        print $row['nom'] . ' : ' . $row['description'];
+                        ?>
+                        <input type="submit" value="Supprimer">
+                        <input type="hidden" name="idTache" value="<?php print $row['id'] ?>">
+                        <input type="hidden" name="action" value="SupprimerTachePublique">
+                        <?php
+                        print "<BR>";
+                        ?>
+                    </form>
                     <?php
-                    print "<BR>";
-                    ?>
-                </form>
-                <?php
+                }
             }
             ?>
             <form method="post" name="myform" id="myform">
@@ -106,28 +113,31 @@ if (isset($dVue)) {
             <?php
         }
 
-        if (isset($tachesCo) && count($tachesCo) > 0) {
+        if (isset($tachesCo)) {
             ?>
             <br><br>
-            <h2 align="center">Tâches personnelles</h2>
-            <hr/><?php
-            foreach ($tachesCo as $row) {
-                ?>
-                <form method="post" name="myform" id="myform">
-                    <!-- engadget -->
-                    <input name="checkFait" <?php if ($row['status'] == 1) echo 'checked'; ?> type="checkbox">
-                    <?php
-                    print $row['nom'] . ' : ' . $row['description'];
+            <h2 align="center"> Tâches personnelles </h2>
+            <hr/>
+            <?php
+            if (count($tachesCo) > 0) {
+                foreach ($tachesCo as $row) {
                     ?>
-                    <input type="submit" value="Supprimer">
-                    <input type="hidden" name="idTache" value="<?php print $row['id'] ?>">
-                    <input type="hidden" name="user" value="<?php print $id ?>">
-                    <input type="hidden" name="action" value="SupprimerTachePrivee">
+                    <form method="post" name="myform" id="myform">
+                        <!-- engadget -->
+                        <input name="checkFait" <?php if ($row['status'] == 1) echo 'checked'; ?> type="checkbox">
+                        <?php
+                        print $row['nom'] . ' : ' . $row['description'];
+                        ?>
+                        <input type="submit" value="Supprimer">
+                        <input type="hidden" name="idTache" value="<?php print $row['id'] ?>">
+                        <input type="hidden" name="user" value="<?php print $id ?>">
+                        <input type="hidden" name="action" value="SupprimerTachePrivee">
+                        <?php
+                        print "<BR>";
+                        ?>
+                    </form>
                     <?php
-                    print "<BR>";
-                    ?>
-                </form>
-                <?php
+                }
             }
             ?>
             <form method="post" name="myform" id="myform">

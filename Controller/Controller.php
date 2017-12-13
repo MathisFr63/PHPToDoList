@@ -17,7 +17,6 @@ class Controller
 
         try {
             $action = $_REQUEST['action'];
-            print "Action : " . $action . "<BR>";
             switch ($action) {
 
 //pas d'action, on r�initialise 1er appel
@@ -73,7 +72,7 @@ class Controller
     }//fin constructeur
 
 
-    protected function Connexion() : void
+    protected function Connexion(): void
     {
         global $rep, $view;
         $dVue = array(
@@ -81,11 +80,10 @@ class Controller
             'mdp' => "",
             'taches' => ""
         );
-        print "Login : " . $_SESSION['login'];
         require($rep . $view['connexion']);
     }
 
-    protected function SeConnecter() : void
+    protected function SeConnecter(): void
     {
         global $rep, $view;
         if (isset($_POST['txtId']) && isset($_POST['txtMdp'])) {
@@ -95,7 +93,6 @@ class Controller
                 $erreurConnexion = true;
                 $this->Connexion();
             } else {
-                var_dump($user);
                 header('Location: index.php?action=AffichageTaches');
             }
         }
@@ -103,17 +100,7 @@ class Controller
 
     function Reinit()
     {
-        global $rep, $view; // nécessaire pour utiliser variables globales
-
-        $model = new TacheModel();
-        $taches = $model->get_tasks_public();
-
-        $dVue = array(
-            'id' => "",
-            'mdp' => "",
-            'taches' => $taches
-        );
-        require($rep . $view['accueil']);
+        header('Location: index.php?action=AffichageTaches');
     }
 
     function AffichageTaches(array $dVueEreur)
