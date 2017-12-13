@@ -15,9 +15,10 @@ $rep=__DIR__.'/../';
 //$login="";
 //$mdp="";
 
- $base="dbmafrizot1";
- $login="root";
- $mdp="";
+ $host='hina';
+ $base='dbmafrizot1';
+ $login='mafrizot1';
+ $mdp='mafrizot1';
 
 //Vues
 

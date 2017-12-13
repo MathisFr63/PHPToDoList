@@ -6,8 +6,9 @@ class TacheModel
 
     public function __construct()
     {
+        global $host, $base, $login, $mdp;
 //        $this->tPg = new tachePGateway(new Connection('mysql:host=localhost;dbname=dbmafrizot1', 'root', ''));
-        $this->tPg = new tachePGateway(new Connection('mysql:host=hina;dbname=dbmafrizot1', 'mafrizot1', 'mafrizot1'));
+        $this->tPg = new tachePGateway(new Connection('mysql:host='.$host.';dbname='.$base, $login, $mdp));
     }
 
     function get_tasks_public(): array
@@ -44,6 +45,11 @@ class TacheModel
         if ($_SESSION['role'] == 'admin') {
             $this->tPg->SupprimerTachePrivee($idTache, $user);
         }
+    }
+
+    function changerStatusTachePublique($idTache, $statusTache)
+    {
+        $this->tPg->changerStatusTachePublique($idTache, $statusTache);
     }
 }
 

@@ -81,7 +81,7 @@ if (isset($dVue)) {
         if (isset($taches) && count($taches) > 0) {
             foreach ($taches as $row) {
                 ?>
-                <form method="post" name="myform" id="myform">
+                <form style="float:left"; method="post" name="myform" id="myform">
                     <!-- engadget -->
                     <input name="checkFait" <?php if ($row['status'] == 1) echo 'checked'; ?> type="checkbox">
                     <?php
@@ -93,6 +93,12 @@ if (isset($dVue)) {
                     <?php
                     print "<BR>";
                     ?>
+                </form>
+                <form method="post" name="myform" id="myform">
+                    <input type="submit" value="Modifier">
+                    <input type="hidden" name="action" value="ChangerStatusTachePublique">
+                    <input type="hidden" name="idTache" value="<?php print $row['id'] ?>">
+                    <input type="hidden" name="statusTache" value="<?php print $row['status'] ?>">
                 </form>
                 <?php
             }
