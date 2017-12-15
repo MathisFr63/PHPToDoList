@@ -44,7 +44,7 @@ class tachePGateway
 
     public function modifierTache($id, $nom, $desc, $status, $user)
     {
-        $this->con->executeQuery("update tacheP set nom = :nom, description = :description, status = :status, user = :user where id = :id", array(
+        $this->con->executeQuery("update tachep set nom = :nom, description = :description, status = :status, user = :user where id = :id", array(
             ':id' => array($id, PDO::PARAM_INT),
             ':nom' => array($nom, PDO::PARAM_STR),
             ':description' => array($desc, PDO::PARAM_STR),
@@ -61,7 +61,7 @@ class tachePGateway
 
     public function afficherTachesUser($login) : array
     {
-        $this->con->executeQuery("select * from tacheP where user = :user", array(':user' => array($login, PDO::PARAM_STR)));
+        $this->con->executeQuery("select * from tachep where user = :user", array(':user' => array($login, PDO::PARAM_STR)));
 //        $this->con->executeQuery('select * from tache');
         return $this->con->getResults();
     }
