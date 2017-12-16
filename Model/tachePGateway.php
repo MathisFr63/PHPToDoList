@@ -42,6 +42,14 @@ class tachePGateway
         $this->con->executeQuery("delete from tachep where user = :user and id = :id", array(':user' => array($user, PDO::PARAM_STR), ':id' => array($id, PDO::PARAM_INT)));
     }
 
+    public function UpdateStatusPublic($id, $status){
+        $this->con->executeQuery("update tache set status = :status where id = :id", array(':status' => array($status, PDO::PARAM_BOOL), ':id' => array($id, PDO::PARAM_INT)));
+    }
+
+    public function UpdateStatusPrivee($id, $status){
+        $this->con->executeQuery("update tachep set status = :status where id = :id", array(':status' => array($status, PDO::PARAM_BOOL), ':id' => array($id, PDO::PARAM_INT)));
+    }
+
     public function modifierTache($id, $nom, $desc, $status, $user)
     {
         $this->con->executeQuery("update tachep set nom = :nom, description = :description, status = :status, user = :user where id = :id", array(

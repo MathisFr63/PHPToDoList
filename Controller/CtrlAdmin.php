@@ -37,6 +37,10 @@ class CtrlAdmin
                     $this->SupprimerTachePrivee();
                     break;
 
+                case "UpdateStatusPrivee" :
+                    $this->UpdateStatusPrivee();
+                    break;
+
                 default:
                     $dVueEreur[] = "Erreur d'appel php";
                     require($rep . $view['erreur']);
@@ -112,5 +116,19 @@ class CtrlAdmin
     {
         AdminModel::deconnexion();
         header('Location: index.php');
+    }
+
+    function UpdateStatusPrivee()
+    {
+        $dVueEreur = array();
+        global $rep, $view;
+
+        $idTache = $_POST['idTache'];
+        $status = $_POST['checkFait']=='on';
+
+        $model = new TacheModel();
+        $model->UpdateStatusPrivee($idTache, $status);
+
+        $this->Reinit();
     }
 }

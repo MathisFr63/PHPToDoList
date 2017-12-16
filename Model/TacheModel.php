@@ -45,6 +45,17 @@ class TacheModel
             $this->tPg->SupprimerTachePrivee($idTache, $user);
         }
     }
+
+    function UpdateStatusPublic($idTache, $status){
+        $this->tPg->UpdateStatusPublic($idTache, $status);
+    }
+
+    function UpdateStatusPrivee($idTache, $status)
+    {
+        if ($_SESSION['role'] == 'admin') {
+            $this->tPg->UpdateStatusPrivee($idTache, $status);
+        }
+    }
 }
 
 ?>

@@ -83,7 +83,7 @@ if (isset($dVue)) {
                     </td>
                 </tr>
             </table>
-
+            Marche pas pour l'instant mais permettra d'afficher un message lorsque la connexion aura échouée.
             <?php if(isset($dvue['erreurConnexion']) && $dvue['erreurConnexion']) echo '<div class="alert alert-danger">Mauvais identifiant ou mot de passe !</div>'; ?>
 
             <!-- action !!!!!!!!!! -->

@@ -37,6 +37,9 @@ class Controller
                     $this->SupprimerTachePublique();
                     break;
 
+                case "UpdateStatusPublic" :
+                    $this->UpdateStatusPublic();
+                    break;
 
                 default:
                     $dVueEreur[] = "Erreur d'appel php";
@@ -133,6 +136,18 @@ class Controller
         $this->Reinit();
     }
 
-}//fin class
+    function UpdateStatusPublic()
+    {
+        $dVueEreur = array();
+        global $rep, $view;
 
+        $idTache = $_POST['idTache'];
+        $status = $_POST['checkFait']=='on';
+
+        $model = new TacheModel();
+        $model->UpdateStatusPublic($idTache, $status);
+
+        $this->Reinit();
+    }
+}
 ?>

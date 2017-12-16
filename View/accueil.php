@@ -86,9 +86,13 @@ if (isset($dVue)) {
 
                 foreach ($taches as $row) {
                     ?>
-                    <form method="post" name="myform" id="myform">
-                        <!-- engadget -->
-                        <input name="checkFait" <?php if ($row['status'] == 1) echo 'checked'; ?> type="checkbox">
+                    <form id='status' name="status" method='post' action="index.php?action=UpdateStatusPublic">
+                        <input type="hidden" name="idTache" value="<?php print $row['id'] ?>">
+                        <input name="checkFait" <?php if ($row['status'] == 1) echo 'checked'; ?> type="checkbox"
+                               onclick="this.form.submit();">
+                    </form>
+
+                    <form method="post" name="myform" id="myform" style="display: inline-block">
                         <?php
                         print $row['nom'] . ' : ' . $row['description'];
                         ?>
@@ -121,9 +125,13 @@ if (isset($dVue)) {
             if (count($tachesCo) > 0) {
                 foreach ($tachesCo as $row) {
                     ?>
+                    <form id='status' name="status" method='post' action="index.php?action=UpdateStatusPrivee">
+                        <input type="hidden" name="idTache" value="<?php print $row['id'] ?>">
+                        <input name="checkFait" <?php if ($row['status'] == 1) echo 'checked'; ?> type="checkbox"
+                               onclick="this.form.submit();">
+                    </form>
+
                     <form method="post" name="myform" id="myform">
-                        <!-- engadget -->
-                        <input name="checkFait" <?php if ($row['status'] == 1) echo 'checked'; ?> type="checkbox">
                         <?php
                         print $row['nom'] . ' : ' . $row['description'];
                         ?>
