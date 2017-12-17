@@ -17,7 +17,7 @@ class AdminModel
     public function __construct()
     {
         global $host, $base, $identifiant, $pass;
-        $this->tPg = new tachePGateway(new Connection('mysql:host='. $host . ';dbname='.$base, $identifiant, $pass));
+        $this->tPg = new tacheGateway(new Connection('mysql:host='. $host . ';dbname='.$base, $identifiant, $pass));
     }
 
 
@@ -25,7 +25,9 @@ class AdminModel
     {
         $login = Nettoyer::nettoyer_string($login);
         $mdp = Nettoyer::nettoyer_string($mdp);
-        if (userGateway::getPass($login, $mdp)) {
+//        Pour récupérer le mot de passe et le mettre a l'iut :
+//        10e151b0e07706239a9888cfe81218f3
+        if (userGateway::getPass($login, hash("ripemd128", $mdp))) {
             $_SESSION['login'] = $login;
             $_SESSION['role'] = 'admin';
             return new User($login);

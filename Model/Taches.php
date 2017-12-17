@@ -1,23 +1,24 @@
 <?php
-
 /**
  * Created by PhpStorm.
  * User: mafrizot1
  * Date: 15/11/17
  * Time: 15:17
  */
-class tache
+
+//Sert a rien pour le moment.
+class Taches
 {
-    private $id;
     private $nom;
     private $description;
     private $fait;
+    private $user;
 
-    public function __construct($id, $nom, $desc, $fait)
+    public function __construct($nom, $desc, $fait, $user)
     {
-        $this->id = $id;
         $this->nom = $nom;
         $this->description = $desc;
         $this->fait = $fait;
+        $this->user = $user;
     }
 }

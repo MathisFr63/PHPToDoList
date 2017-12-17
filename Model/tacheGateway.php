@@ -1,10 +1,10 @@
 <?php
 
 /**
- * Created by PhpSt0orm.
+ * Created by PhpStorm.
  * User: bepereiraa
- * Date: 22/11/17
- * Time: 15:06
+ * Date: 29/11/17
+ * Time: 15:00
  */
 class tacheGateway
 {
@@ -15,33 +15,63 @@ class tacheGateway
         $this->con = $con;
     }
 
-    public function ajouterTache($nom, $desc, $status)
+    public function ajouterTachePublique($nom, $desc)
     {
-        $this->con->executeQuery("insert into tache(nom, description, status) values(:nom, :description, :status)", array(
+        $this->con->executeQuery("insert into tache(nom, description, status) values(:nom, :desc, 0)", array(
             ':nom' => array($nom, PDO::PARAM_STR),
-            ':description' => array($desc, PDO::PARAM_STR),
-            ':status' => array($status, PDO::PARAM_INT)
+            ':desc' => array($desc, PDO::PARAM_STR)
         ));
     }
 
-    public function supprimerTache($id)
+    public function ajouterTachePrivee($nom, $desc, $user)
+    {
+        $this->con->executeQuery("insert into tachep(nom, description, status, user) values(:nom, :description, 0, :user)", array(
+            ':nom' => array($nom, PDO::PARAM_STR),
+            ':description' => array($desc, PDO::PARAM_STR),
+            ':user' => array($user, PDO::PARAM_STR)
+        ));
+    }
+
+    public function supprimerTachePublique($id)
     {
         $this->con->executeQuery("delete from tache where id = :id", array(':id' => array($id, PDO::PARAM_INT)));
     }
 
-    public function modifierTache($id, $nom, $desc, $status)
+    public function SupprimerTachePrivee($id, $user)
     {
-         $this->con->executeQuery("update tache set nom = :nom, description = :description, status = :status where id = :id", array(
+        $this->con->executeQuery("delete from tachep where user = :user and id = :id", array(':user' => array($user, PDO::PARAM_STR), ':id' => array($id, PDO::PARAM_INT)));
+    }
+
+    public function UpdateStatusPublic($id, $status)
+    {
+        $this->con->executeQuery("update tache set status = :status where id = :id", array(':status' => array($status, PDO::PARAM_BOOL), ':id' => array($id, PDO::PARAM_INT)));
+    }
+
+    public function UpdateStatusPrivee($id, $status)
+    {
+        $this->con->executeQuery("update tachep set status = :status where id = :id", array(':status' => array($status, PDO::PARAM_BOOL), ':id' => array($id, PDO::PARAM_INT)));
+    }
+
+    public function modifierTache($id, $nom, $desc, $status, $user)
+    {
+        $this->con->executeQuery("update tachep set nom = :nom, description = :description, status = :status, user = :user where id = :id", array(
             ':id' => array($id, PDO::PARAM_INT),
             ':nom' => array($nom, PDO::PARAM_STR),
             ':description' => array($desc, PDO::PARAM_STR),
-            ':status' => array($status, PDO::PARAM_INT)
+            ':status' => array($status, PDO::PARAM_INT),
+            ':user' => array($user, PDO::PARAM_STR)
         ));
     }
 
-    public function afficherTaches() : array
+    public function afficherTaches(): array
     {
         $this->con->executeQuery('select * from tache');
+        return $this->con->getResults();
+    }
+
+    public function afficherTachesUser($login): array
+    {
+        $this->con->executeQuery("select * from tachep where user = :user", array(':user' => array($login, PDO::PARAM_STR)));
         return $this->con->getResults();
     }
 }

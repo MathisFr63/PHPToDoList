@@ -7,6 +7,7 @@ $rep = __DIR__ . '/../';
 
 //$dConfig['includes']= array('controleur/Validation.php');
 
+$nbTachesParPage=10;
 
 //BD
 

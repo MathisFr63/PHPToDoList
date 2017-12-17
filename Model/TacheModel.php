@@ -7,13 +7,19 @@ class TacheModel
     public function __construct()
     {
         global $host, $base, $identifiant, $pass;
-        $this->tPg = new tachePGateway(new Connection('mysql:host='. $host . ';dbname='.$base, $identifiant, $pass));
+        $this->tPg = new tacheGateway(new Connection('mysql:host=' . $host . ';dbname=' . $base, $identifiant, $pass));
     }
 
     function get_tasks_public(): array
     {
         return $this->tPg->afficherTaches();
     }
+
+    public function getNbTaches(): int
+    {
+        return $this->tPg->getNbTaches();
+    }
+
 
     function get_tasks_user($login): array
     {
@@ -46,7 +52,8 @@ class TacheModel
         }
     }
 
-    function UpdateStatusPublic($idTache, $status){
+    function UpdateStatusPublic($idTache, $status)
+    {
         $this->tPg->UpdateStatusPublic($idTache, $status);
     }
 

@@ -103,8 +103,6 @@ class Controller
             'taches' => $taches
         );
 
-        // Il faudra appeler cette page que lorsque la connection aura échouée
-        // require($rep . $view['Connexion']);
         require($rep . $view['accueil']);
     }
 
@@ -142,7 +140,7 @@ class Controller
         global $rep, $view;
 
         $idTache = $_POST['idTache'];
-        $status = $_POST['checkFait']=='on';
+        $status = $_POST['checkFait'] == 'on';
 
         $model = new TacheModel();
         $model->UpdateStatusPublic($idTache, $status);
@@ -150,4 +148,5 @@ class Controller
         $this->Reinit();
     }
 }
+
 ?>
