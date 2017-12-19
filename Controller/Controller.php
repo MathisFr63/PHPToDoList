@@ -14,11 +14,11 @@ class Controller
             switch ($action) {
 
                 case NULL:
-                    $this->AffichageTaches($dVueEreur);
+                    $this->AffichageTaches();
                     break;
 
                 case "AffichageTaches":
-                    $this->AffichageTaches($dVueEreur);
+                    $this->AffichageTaches();
                     break;
 
                 case "Connexion" :
@@ -76,29 +76,44 @@ class Controller
 
     protected function SeConnecter(): void
     {
+        global $rep, $view;
+
         if (isset($_POST['txtId']) && isset($_POST['txtMdp'])) {
             $user = AdminModel::seConnecter($_POST['txtId'], $_POST['txtMdp']);
             if ($user == NULL) {
-//            if (AdminModel::seConnecter($_POST['txtId'], $_POST['txtMdp']) == false) {
                 $erreurConnexion = true;
-                $this->Connexion();
+                $dVue = array(
+                    'id' => "",
+                    'mdp' => "",
+                    'taches' => ""
+                );
+                require($rep . $view['connexion']);
             } else {
                 header('Location: index.php?action=AffichageTaches');
             }
         }
     }
 
-    function Reinit()
+    function Reinit(): void
     {
         header('Location: index.php?action=AffichageTaches');
     }
 
-    function AffichageTaches(array $dVueEreur)
+    function AffichageTaches(): void
     {
-        global $rep, $view;
+        global $rep, $view, $nbTachesParPage;
+        $page_decart = 5;
 
         $model = new TacheModel();
-        $taches = $model->get_tasks_public();
+        $totalTaches = $model->getNbTaches();
+        $nbPages = ceil($totalTaches / $nbTachesParPage);
+        $page = Nettoyer::nettoyer_int($_GET['p']);
+        $pageMin = $page - $page_decart <= 0 ? 1 : $page_decart;
+        $pageMax = $page + $page_decart >= $nbPages ? $nbPages : $page_decart;
+        $premiereTache = ($page - 1) * $nbTachesParPage;
+        $derniereTache = $nbTachesParPage;
+        $taches = $model->get_tasks_public_avec_pages($premiereTache, $derniereTache);
+
         $dVue = array(
             'taches' => $taches
         );
@@ -106,7 +121,7 @@ class Controller
         require($rep . $view['accueil']);
     }
 
-    function AddPublicTask()
+    function AddPublicTask(): void
     {
         $dVueEreur = array();
         global $rep, $view;
@@ -121,7 +136,7 @@ class Controller
         $this->Reinit();
     }
 
-    function SupprimerTachePublique()
+    function SupprimerTachePublique(): void
     {
         $dVueEreur = array();
         global $rep, $view;
@@ -134,7 +149,7 @@ class Controller
         $this->Reinit();
     }
 
-    function UpdateStatusPublic()
+    function UpdateStatusPublic(): void
     {
         $dVueEreur = array();
         global $rep, $view;

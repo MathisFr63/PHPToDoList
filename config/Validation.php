@@ -2,20 +2,7 @@
 
 class Validation
 {
-
-    static function val_action($action)
-    {
-
-        if (!isset($action)) {
-            throw new Exception('pas d\'action');
-            //on pourrait aussi utiliser
-//$action = $_GET['action'] ?? 'no';
-            // This is equivalent to:
-            //$action =  if (isset($_GET['action'])) $action=$_GET['action']  else $action='no';
-        }
-    }
-
-    static function val_form(string &$id, string &$mdp, array &$dVueEreur)
+    static function val_form(string $id, string $mdp, array $dVueEreur): void
     {
         if (!isset($id) || $id == "") {
             $dVueEreur[] = "Pas d'identifiant";
@@ -41,7 +28,7 @@ class Validation
         }
     }
 
-    static function val_ajout(string &$nom, string &$desc, array &$dVueEreur)
+    static function val_ajout(string $nom, string $desc, array $dVueEreur)
     {
         if (!isset($nom) || $nom == "") {
             $dVueEreur[] = "Pas de nom";
@@ -67,7 +54,7 @@ class Validation
         }
     }
 
-    static function val_addPrivate(string &$nom, string &$desc, string &$user, array &$dVueEreur)
+    static function val_addPrivate(string $nom, string $desc, string $user, array $dVueEreur)
     {
         if (!isset($nom) || $nom == "") {
             $dVueEreur[] = "Pas de nom";
@@ -102,8 +89,11 @@ class Validation
             $user = "";
         }
     }
+
+    public static function isNumber($input): bool
+    {
+        if (filter_var($input, FILTER_VALIDATE_INT))
+            return true;
+        return false;
+    }
 }
-
-?>
-
-        

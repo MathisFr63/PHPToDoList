@@ -17,7 +17,7 @@ class AdminModel
     public function __construct()
     {
         global $host, $base, $identifiant, $pass;
-        $this->tPg = new tacheGateway(new Connection('mysql:host='. $host . ';dbname='.$base, $identifiant, $pass));
+        $this->tPg = new tacheGateway(new Connection('mysql:host=' . $host . ';dbname=' . $base, $identifiant, $pass));
     }
 
 
@@ -43,8 +43,9 @@ class AdminModel
     }
 
 
-    public static function isAdmin() {
-        if(isset($_SESSION['login']) && isset($_SESSION['role']))
+    public static function isAdmin()
+    {
+        if (isset($_SESSION['login']) && isset($_SESSION['role']))
             return new User(Nettoyer::nettoyer_string($_SESSION['login']));
         else
             return null;
@@ -55,7 +56,7 @@ class AdminModel
         return $this->tPg->afficherTaches();
     }
 
-    function get_tasks_user($login): array
+    function get_tasks_user(string $login): array
     {
         if ($_SESSION['role'] == 'admin') {
             return $this->tPg->afficherTachesUser($login);

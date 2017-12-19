@@ -15,7 +15,8 @@ class userGateway
         $this->con = $con;
     }
 
-    public function ajouterUser($id, $mdp, $nom, $prenom)
+//     On a pas intégré cette fonctionnalité
+    public function ajouterUser(int $id, string $mdp, string $nom, string $prenom)
     {
         $this->con->executeQuery("insert into user(identifiant, mdp, nom, prenom) values(:id, :mdp, :nom, :prenom)", array(
             ':id' => array($id, PDO::PARAM_STR),
@@ -25,12 +26,13 @@ class userGateway
         ));
     }
 
-    public function supprimerUser($id)
+//    On a pas intégré cette fonctionnalité
+    public function supprimerUser(int $id)
     {
         $this->con->executeQuery("delete from user where identifiant = :id", array(':id' => array($id, PDO::PARAM_STR)));
     }
-
-    public function modifierUser($id, $mdp, $nom, $prenom)
+//    On a pas intégré cette fonctionnalité
+    public function modifierUser(string $id, string $mdp, string $nom, string $prenom)
     {
         $this->con->executeQuery("update user set mdp = :mdp nom = :nom, prenom = :prenom where identifiant = :id", array(
             ':id' => array($id, PDO::PARAM_STR),
@@ -40,10 +42,10 @@ class userGateway
         ));
     }
 
-    static function getPass($login, $mdp): bool
+    static function getPass(string $login, string $mdp): bool
     {
         global $host, $base, $identifiant, $pass;
-        $con = new Connection('mysql:host='. $host . ';dbname='.$base, $identifiant, $pass);
+        $con = new Connection('mysql:host=' . $host . ';dbname=' . $base, $identifiant, $pass);
 
         $con->executeQuery('select identifiant from user where identifiant = :login and mdp = :mdp',
             array(

@@ -14,7 +14,7 @@ class Taches
     private $fait;
     private $user;
 
-    public function __construct($nom, $desc, $fait, $user)
+    public function __construct(string $nom, string $desc, string $fait, string $user)
     {
         $this->nom = $nom;
         $this->description = $desc;

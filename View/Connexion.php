@@ -66,7 +66,8 @@ if (isset($dVue)) {
         <!-- affichage de donn�es provenant du mod�le -->
         <?= $dVue['data'] ?>
 
-        <form style="border: black 1px solid; border-radius: 10px; background: #717670; display: inline-block; padding: 20" method="post" name="myform" id="myform" action="index.php?action=SeConnecter">
+        <form style="border: black 1px solid; border-radius: 10px; background: #717670; display: inline-block; padding: 20"
+              method="post" name="myform" id="myform" action="index.php?action=SeConnecter">
             <table>
                 <tr>
                     <td>Identifiant</td>
@@ -83,11 +84,17 @@ if (isset($dVue)) {
                     </td>
                 </tr>
             </table>
-            Marche pas pour l'instant mais permettra d'afficher un message lorsque la connexion aura échouée.
-            <?php if(isset($dvue['erreurConnexion']) && $dvue['erreurConnexion']) echo '<div class="alert alert-danger">Mauvais identifiant ou mot de passe !</div>'; ?>
+            <!--            Marche pas pour l'instant mais permettra d'afficher un message lorsque la connexion aura échouée.-->
+            <?php
+            if (isset($erreurConnexion) && $erreurConnexion) {
+                ?>
+                <div class="alert alert-danger fade in">Mauvais identifiant ou mot de passe !</div>
+                <?php
+            }
+            ?>
 
             <!-- action !!!!!!!!!! -->
-<!--            <input type="hidden" name="action" value="index.php?action=ValidationConnection">-->
+            <!--            <input type="hidden" name="action" value="index.php?action=ValidationConnection">-->
         </form>
     </div>
 

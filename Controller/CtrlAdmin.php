@@ -58,20 +58,36 @@ class CtrlAdmin
         exit(0);
     }
 
-    function Reinit()
+    function Reinit(): void
     {
         header('Location: index.php?action=AffichageTaches');
     }
 
-    function AffichageTachesPrivees()
+    function AffichageTachesPrivees(): void
     {
-        global $rep, $view;
+        global $rep, $view, $nbTachesParPage;
+        $page_decart = 5;
+
+        $model = new TacheModel();
+        $totalTaches = $model->getNbTaches();
+        $nbPages = ceil($totalTaches / $nbTachesParPage);
+        $page=Nettoyer::nettoyer_int($_GET['p']);
+        $pageMin= $page-$page_decart < 0 ? 1 : $page_decart;
+        $pageMax= $page+$page_decart >= $nbPages ? $nbPages : $page_decart;
+        $premiereTache = ($page - 1) * $nbTachesParPage;
+        $derniereTache = $nbTachesParPage;
+        $taches = $model->get_tasks_public_avec_pages($premiereTache, $derniereTache);
 
         $id = $_SESSION['login'];
 
-        $model = new TacheModel();
-        $taches = $model->get_tasks_public();
-        $tachesCo = $model->get_tasks_user($id);
+        $totalTachesPrivees = $model->getNbTachesPrivees();
+        $nbPagesPrivees = ceil($totalTachesPrivees / $nbTachesParPage);
+        $pagePrivee=Nettoyer::nettoyer_int($_GET['p2']);
+        $pageMinPrivee= $pagePrivee-$page_decart <= 0 ? 1 : $page_decart;
+        $pageMaxPrivee= $pagePrivee+$page_decart >= $nbPagesPrivees ? $nbPagesPrivees : $page_decart;
+        $premiereTachePrivee = ($pagePrivee - 1) * $nbTachesParPage;
+        $derniereTachePrivee = $nbTachesParPage;
+        $tachesCo = $model->get_tasks_user_avec_pages($id, $premiereTachePrivee, $derniereTachePrivee);
 
         $dVue = array(
             'id' => $id,
@@ -82,7 +98,7 @@ class CtrlAdmin
         require($rep . $view['accueil']);
     }
 
-    function AddPrivateTask()
+    function AddPrivateTask(): void
     {
         $dVueEreur = array();
         global $rep, $view;
@@ -98,7 +114,7 @@ class CtrlAdmin
         $this->Reinit();
     }
 
-    function SupprimerTachePrivee()
+    function SupprimerTachePrivee(): void
     {
         $dVueEreur = array();
         global $rep, $view;
@@ -112,13 +128,13 @@ class CtrlAdmin
         $this->Reinit();
     }
 
-    function Deconnexion()
+    function Deconnexion(): void
     {
         AdminModel::deconnexion();
         header('Location: index.php');
     }
 
-    function UpdateStatusPrivee()
+    function UpdateStatusPrivee(): void
     {
         $dVueEreur = array();
         global $rep, $view;

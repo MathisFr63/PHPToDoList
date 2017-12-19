@@ -15,54 +15,67 @@ class TacheModel
         return $this->tPg->afficherTaches();
     }
 
-    public function getNbTaches(): int
+    function get_tasks_public_avec_pages(int $premiereTache, int $derniereTache)
     {
-        return $this->tPg->getNbTaches();
+        return $this->tPg->get_tasks_public_avec_pages($premiereTache, $derniereTache);
     }
 
+    public function getNbTaches(): int
+    {
+        return $this->tPg->getNbTachesTotal();
+    }
 
-    function get_tasks_user($login): array
+    function getNbTachesPrivees(): int
+    {
+        return $this->tPg->getNbTachesPriveesTotal();
+
+    }
+
+    function get_tasks_user(string $login): array
     {
         if ($_SESSION['role'] == 'admin') {
             return $this->tPg->afficherTachesUser($login);
         }
     }
 
-    function ajouterTachePublique($nom, $desc)
+    function get_tasks_user_avec_pages(string $login, int $premiereTachePrivee, int $derniereTachePrivee): array
+    {
+        return $this->tPg->get_tasks_user_avec_pages($login, $premiereTachePrivee, $derniereTachePrivee);
+    }
+
+    function ajouterTachePublique(string $nom, string $desc)
     {
         $this->tPg->ajouterTachePublique($nom, $desc);
     }
 
-    function ajouterTachePrivee($nom, $desc, $user)
+    function ajouterTachePrivee(string $nom, string $desc, string $user)
     {
         if ($_SESSION['role'] == 'admin') {
             $this->tPg->ajouterTachePrivee($nom, $desc, $user);
         }
     }
 
-    function supprimerTachePublique($idTache)
+    function supprimerTachePublique(int $idTache)
     {
         $this->tPg->supprimerTachePublique($idTache);
     }
 
-    function SupprimerTachePrivee($idTache, $user)
+    function SupprimerTachePrivee(int $idTache, string $user)
     {
         if ($_SESSION['role'] == 'admin') {
             $this->tPg->SupprimerTachePrivee($idTache, $user);
         }
     }
 
-    function UpdateStatusPublic($idTache, $status)
+    function UpdateStatusPublic(int $idTache, bool $status)
     {
         $this->tPg->UpdateStatusPublic($idTache, $status);
     }
 
-    function UpdateStatusPrivee($idTache, $status)
+    function UpdateStatusPrivee(int $idTache, bool $status)
     {
         if ($_SESSION['role'] == 'admin') {
             $this->tPg->UpdateStatusPrivee($idTache, $status);
         }
     }
 }
-
-?>

@@ -7,7 +7,7 @@ $rep = __DIR__ . '/../';
 
 //$dConfig['includes']= array('controleur/Validation.php');
 
-$nbTachesParPage=10;
+$nbTachesParPage = 5;
 
 //BD
 
@@ -16,10 +16,10 @@ $nbTachesParPage=10;
 //$identifiant = 'mafrizot1';
 //$pass = 'mafrizot1';
 
-$host='localhost';
-$base='dbmafrizot1';
-$identifiant='root';
-$pass='';
+$host = 'localhost';
+$base = 'dbmafrizot1';
+$identifiant = 'root';
+$pass = '';
 
 $view['erreur'] = 'View/erreur.php';
 $view['connexion'] = 'View/Connexion.php';

@@ -1,51 +1,18 @@
 <html>
 <head><title>Tâches</title>
+    <link rel="icon" href="views/imgs/favicon.ico"/>
+    <link type="text/css" rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link type="text/css" rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"
+          integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+</head>
 
-    <script type="text/javascript">
-        function clearForm(oForm) {
-            var elements = oForm.elements;
-
-            oForm.reset();
-
-            for (i = 0; i < elements.length; i++) {
-
-                field_type = elements[i].type.toLowerCase();
-
-                switch (field_type) {
-
-                    case "text":
-                    case "password":
-                    case "textarea":
-                    case "hidden":
-
-                        elements[i].value = "";
-                        break;
-
-                    case "radio":
-                    case "checkbox":
-                        if (elements[i].checked) {
-                            elements[i].checked = false;
-                        }
-                        break;
-
-                    case "select-one":
-                    case "select-multi":
-                        elements[i].selectedIndex = -1;
-                        break;
-
-                    default:
-                        break;
-                }
-            }
-        }
-
-    </script>
 </head>
 
 <body>
 <?php
 
-// on v�rifie les donn�es provenant du mod�le
 if (isset($dVue)) {
     ?>
     <?php
@@ -73,7 +40,6 @@ if (isset($dVue)) {
                 ?>
             </form>
         </div>
-        <?= $dVue['data'] ?>
 
         <?php
         if (isset($taches)) {
@@ -86,23 +52,26 @@ if (isset($dVue)) {
 
                 foreach ($taches as $row) {
                     ?>
-                    <form id='status' name="status" method='post' action="index.php?action=UpdateStatusPublic">
-                        <input type="hidden" name="idTache" value="<?php print $row['id'] ?>">
-                        <input name="checkFait" <?php if ($row['status'] == 1) echo 'checked'; ?> type="checkbox"
-                               onclick="this.form.submit();">
-                    </form>
+                    <div class="d-flex align-items-center">
+                        <form style="margin-left: 10px; margin-right: 10px" id='status' name="status" method='post'
+                              action="index.php?action=UpdateStatusPublic">
+                            <input type="hidden" name="idTache" value="<?php print $row['id'] ?>">
+                            <input name="checkFait" <?php if ($row['status'] == 1) echo 'checked'; ?> type="checkbox"
+                                   onclick="this.form.submit();">
+                        </form>
 
-                    <form method="post" name="myform" id="myform" style="display: inline-block">
-                        <?php
-                        print $row['nom'] . ' : ' . $row['description'];
-                        ?>
-                        <input type="submit" value="Supprimer">
-                        <input type="hidden" name="idTache" value="<?php print $row['id'] ?>">
-                        <input type="hidden" name="action" value="SupprimerTachePublique">
-                        <?php
-                        print "<BR>";
-                        ?>
-                    </form>
+                        <form method="post" name="myform" id="myform" style="display: inline-block">
+                            <?php
+                            print $row['nom'] . ' : ' . $row['description'];
+                            ?>
+                            <input type="submit" value="Supprimer">
+                            <input type="hidden" name="idTache" value="<?php print $row['id'] ?>">
+                            <input type="hidden" name="action" value="SupprimerTachePublique">
+                            <?php
+                            print "<BR>";
+                            ?>
+                        </form>
+                    </div>
                     <?php
                 }
             }
@@ -116,6 +85,20 @@ if (isset($dVue)) {
             <?php
         }
 
+        if (isset($page) && isset($pageMin) && isset($pageMax) && $pageMin != $pageMax) {
+            echo '<div class="col-md-6 offset-md-3 d-flex justify-content-center">
+                <p>Page : </p>';
+            for ($i = $pageMin; $i < $page; $i++)
+                echo '<a href="index.php?' . $request . 'p=' . $i . '&&p2=' . $pagePrivee . '" style="padding-left: 10px"><p>' . $i . '</p></a> ';
+            for ($i = $page; $i <= $pageMax; $i++) {
+                if ($i == $page)
+                    echo '<a href="index.php?' . $request . 'p=' . $i . '&&p2=' . $pagePrivee . '" style="padding-left: 10px"><p><strong>' . $i . '</strong></p></a> ';
+                else
+                    echo '<a href="index.php?' . $request . 'p=' . $i . '&&p2=' . $pagePrivee . '" style="padding-left: 10px"><p>' . $i . '</p></a> ';
+            }
+            echo "</div>";
+        }
+
         if (isset($tachesCo)) {
             ?>
             <br><br>
@@ -125,24 +108,26 @@ if (isset($dVue)) {
             if (count($tachesCo) > 0) {
                 foreach ($tachesCo as $row) {
                     ?>
-                    <form id='status' name="status" method='post' action="index.php?action=UpdateStatusPrivee">
-                        <input type="hidden" name="idTache" value="<?php print $row['id'] ?>">
-                        <input name="checkFait" <?php if ($row['status'] == 1) echo 'checked'; ?> type="checkbox"
-                               onclick="this.form.submit();">
-                    </form>
+                    <div class="d-flex align-items-center">
+                        <form style="margin-left: 10px; margin-right: 10px" id='status' name="status" method='post' action="index.php?action=UpdateStatusPrivee">
+                            <input type="hidden" name="idTache" value="<?php print $row['id'] ?>">
+                            <input name="checkFait" <?php if ($row['status'] == 1) echo 'checked'; ?> type="checkbox"
+                                   onclick="this.form.submit();">
+                        </form>
 
-                    <form method="post" name="myform" id="myform">
-                        <?php
-                        print $row['nom'] . ' : ' . $row['description'];
-                        ?>
-                        <input type="submit" value="Supprimer">
-                        <input type="hidden" name="idTache" value="<?php print $row['id'] ?>">
-                        <input type="hidden" name="user" value="<?php print $id ?>">
-                        <input type="hidden" name="action" value="SupprimerTachePrivee">
-                        <?php
-                        print "<BR>";
-                        ?>
-                    </form>
+                        <form method="post" name="myform" id="myform">
+                            <?php
+                            print $row['nom'] . ' : ' . $row['description'];
+                            ?>
+                            <input type="submit" value="Supprimer">
+                            <input type="hidden" name="idTache" value="<?php print $row['id'] ?>">
+                            <input type="hidden" name="user" value="<?php print $id ?>">
+                            <input type="hidden" name="action" value="SupprimerTachePrivee">
+                            <?php
+                            print "<BR>";
+                            ?>
+                        </form>
+                    </div>
                     <?php
                 }
             }
@@ -156,6 +141,20 @@ if (isset($dVue)) {
             </form>
             <?php
         }
+        if (isset($pagePrivee) && isset($pageMinPrivee) && isset($pageMaxPrivee) && $pageMinPrivee != $pageMaxPrivee) {
+            echo '<div class="col-md-6 offset-md-3 d-flex justify-content-center">
+                <p>Page : </p>';
+            for ($i = $pageMinPrivee; $i < $pagePrivee; $i++)
+                echo '<a href="index.php?' . $request . 'p=' . $page . '&&p2=' . $i . '" style="padding-left: 10px"><p>' . $i . '</p></a> ';
+            for ($i = $pagePrivee; $i <= $pageMaxPrivee; $i++) {
+                if ($i == $page)
+                    echo '<a href="index.php?' . $request . 'p=' . $page . '&&p2=' . $i . '" style="padding-left: 10px"><p><strong>' . $i . '</strong></p></a> ';
+                else
+                    echo '<a href="index.php?' . $request . 'p=' . $page . '&&p2=' . $i . '" style="padding-left: 10px"><p>' . $i . '</p></a> ';
+            }
+            echo "</div>";
+        }
+
         ?>
     <?php }
 } else {
