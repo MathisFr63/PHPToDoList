@@ -50,12 +50,8 @@ class Controller
             $dVueEreur[] = "Erreur inattendue!!! ";
             require($rep . $view['erreur']);
         }
-
-
-//fin
         exit(0);
-    }//fin constructeur
-
+    }
 
     protected function Connexion(): void
     {
@@ -73,7 +69,7 @@ class Controller
         global $rep, $view;
 
         $dVueEreur = array();
-        
+
         if (isset($_POST['txtId']) && isset($_POST['txtMdp'])) {
             $user = AdminModel::seConnecter($_POST['txtId'], $_POST['txtMdp']);
             if ($user == NULL) {
@@ -88,6 +84,7 @@ class Controller
                 header('Location: index.php?action=AffichageTaches');
             }
         }
+        require($rep . $view['erreur']);
     }
 
     function Reinit(): void
@@ -120,7 +117,6 @@ class Controller
     function AddPublicTask(): void
     {
         $dVueEreur = array();
-        global $rep, $view;
 
         $nom = $_POST['txtNom'];
         $desc = $_POST['txtDesc'];
@@ -134,9 +130,6 @@ class Controller
 
     function SupprimerTachePublique(): void
     {
-        $dVueEreur = array();
-        global $rep, $view;
-
         $idTache = $_POST['idTache'];
 
         $model = new TacheModel();
@@ -147,9 +140,6 @@ class Controller
 
     function UpdateStatusPublic(): void
     {
-        $dVueEreur = array();
-        global $rep, $view;
-
         $idTache = $_POST['idTache'];
         $status = $_POST['checkFait'] == 'on';
 
@@ -159,5 +149,3 @@ class Controller
         $this->Reinit();
     }
 }
-
-?>

@@ -8,7 +8,6 @@
  */
 class User
 {
-
     private $identifiant;
 
     public function __construct(string $id)

@@ -10,14 +10,14 @@ class TacheModel
         $this->tPg = new tacheGateway(new Connection('mysql:host=' . $host . ';dbname=' . $base, $identifiant, $pass));
     }
 
-    function get_tasks_public(): array
-    {
-        return $this->tPg->afficherTaches();
-    }
-
     function get_tasks_public_avec_pages(int $premiereTache, int $derniereTache)
     {
         return $this->tPg->get_tasks_public_avec_pages($premiereTache, $derniereTache);
+    }
+
+    function get_tasks_user_avec_pages(string $login, int $premiereTachePrivee, int $derniereTachePrivee): array
+    {
+        return $this->tPg->get_tasks_user_avec_pages($login, $premiereTachePrivee, $derniereTachePrivee);
     }
 
     public function getNbTaches(): int
@@ -29,18 +29,6 @@ class TacheModel
     {
         return $this->tPg->getNbTachesPriveesTotal();
 
-    }
-
-    function get_tasks_user(string $login): array
-    {
-        if ($_SESSION['role'] == 'admin') {
-            return $this->tPg->afficherTachesUser($login);
-        }
-    }
-
-    function get_tasks_user_avec_pages(string $login, int $premiereTachePrivee, int $derniereTachePrivee): array
-    {
-        return $this->tPg->get_tasks_user_avec_pages($login, $premiereTachePrivee, $derniereTachePrivee);
     }
 
     function ajouterTachePublique(string $nom, string $desc)
