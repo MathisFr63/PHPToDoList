@@ -91,26 +91,6 @@ class tacheGateway
         }
     }
 
-    public function afficherTaches(): array
-    {
-        try {
-            $this->con->executeQuery('select * from tache');
-            return $this->con->getResults();
-        } catch (PDOException $e) {
-            throw new Exception($e);
-        }
-    }
-
-    public function afficherTachesUser(string $login): array
-    {
-        try {
-            $this->con->executeQuery("select * from tachep where user = :user", array(':user' => array($login, PDO::PARAM_STR)));
-            return $this->con->getResults();
-        } catch (PDOException $e) {
-            throw new Exception($e);
-        }
-    }
-
     public function getNbTachesTotal(): int
     {
         try {

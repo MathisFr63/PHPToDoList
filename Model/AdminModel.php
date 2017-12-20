@@ -47,16 +47,4 @@ class AdminModel
         else
             return null;
     }
-
-    function get_tasks_public(): array
-    {
-        return $this->tPg->afficherTaches();
-    }
-
-    function get_tasks_user(string $login): array
-    {
-        if ($_SESSION['role'] == 'admin') {
-            return $this->tPg->afficherTachesUser($login);
-        }
-    }
 }
