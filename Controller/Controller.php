@@ -83,8 +83,8 @@ class Controller
             } else {
                 header('Location: index.php?action=AffichageTaches');
             }
-        }
-        require($rep . $view['erreur']);
+        } else
+            header('Location: index.php?action=Erreur');
     }
 
     function Reinit(): void

@@ -1,5 +1,8 @@
 <html>
 <head><title>Connexion</title>
+    <link type="text/css" rel="stylesheet" href="css/bootstrap.css">
+    <link type="text/css" rel="stylesheet" href="css/bootstrap-grid.css">
+    <link type="text/css" rel="stylesheet" href="css/bootstrap-reboot.css">
 
     <script type="text/javascript">
         function clearForm(oForm) {
@@ -47,58 +50,69 @@
 <?php
 
 if (isset($dVue)) {
-    ?>
-    <div align="center">
+?>
+<div align="center">
 
-        <?php
-        if (isset($dVueEreur) && count($dVueEreur) > 0) {
-            echo "<h2>ERREUR</h2>";
-            foreach ($dVueEreur as $value) {
-                echo $value;
-            }
+    <?php
+    if (isset($dVueEreur) && count($dVueEreur) > 0) {
+        echo "<h2>ERREUR</h2>";
+        foreach ($dVueEreur as $value) {
+            echo $value;
         }
-        ?>
+    }
+    ?>
+    <nav class="navbar navbar-expand-md bg-primary">
+        <div class="container">
+            <div class="collapse navbar-collapse justify-content-center">
+                <h1 class="text-info">Connexion</h1>
+            </div>
+        </div>
+    </nav>
 
-        <h1>Connexion</h1>
-        <hr>
-        <!-- affichage de donn�es provenant du mod�le -->
-        <?= $dVue['data'] ?>
+    <!-- affichage de donn�es provenant du mod�le -->
+    <?= $dVue['data'] ?>
 
-        <form style="border: black 1px solid; border-radius: 10px; background: #717670; display: inline-block; padding: 20"
-              method="post" name="myform" id="myform" action="index.php?action=SeConnecter">
-            <table>
-                <tr>
-                    <td>Identifiant</td>
-                    <td><input name="txtId" value="<?= $dVue['id'] ?>" type="text" size="20" required></td>
-                </tr>
-                <tr>
-                    <td>Mot de passe</td>
-                    <td><input name="txtMdp" value="<?= $dVue['mdp'] ?>" type="password" size="20" required></td>
-                </tr>
-            </table>
-            <table>
-                <tr>
-                    <td><input type="submit" value="Connexion"></td>
-                    </td>
-                </tr>
-            </table>
-            <!--            Marche pas pour l'instant mais permettra d'afficher un message lorsque la connexion aura échouée.-->
-            <?php
-            if (isset($erreurConnexion) && $erreurConnexion) {
-                ?>
-                <div class="alert alert-danger fade in">Mauvais identifiant ou mot de passe !</div>
-                <?php
-            }
-            ?>
+    <div class="container">
+        <div class="row h-75 align-items-center">
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
+                <div class="card p-5 bg-secondary">
+                    <div class="card-body">
+                        <h1 class="mb-4 text-info">Connexion</h1>
+                        <form method="post" name="myform" id="myform" action="index.php?action=SeConnecter">
+                            <div class="form-group">
+                                <label class="text-info lead">Identifiant</label>
+                                <input name="txtId" value="<?= $dVue['id'] ?>" type="text" class="form-control bg-light"
+                                       size="20" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="text-info lead">Mot de Passe</label>
+                                <input name="txtMdp" value="<?= $dVue['mdp'] ?>" type="password"
+                                       class="form-control bg-light" size="20" required>
+                                <p class="text-center m-2">
+                                    <input type="submit" class="btn btn-light" value="Connexion">
+                                </p>
 
-            <!-- action !!!!!!!!!! -->
-            <!--            <input type="hidden" name="action" value="index.php?action=ValidationConnection">-->
-        </form>
+                                <?php
+                                if (isset($erreurConnexion) && $erreurConnexion) {
+                                    ?>
+                                    <p style="color: white">Mauvais identifiant ou mot de passe !</p>
+                                    <?php
+                                }
+                                ?>
+
+                                <!-- action !!!!!!!!!! -->
+                                <!--            <input type="hidden" name="action" value="index.php?action=ValidationConnection">-->
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
-<?php } else {
-    print ("Attention, erreur !!<br>");
-    print ("utilisation anormale de la vuephp");
-} ?>
+    <?php } else {
+        print ("Attention, erreur !!<br>");
+        print ("utilisation anormale de la vuephp");
+    } ?>
 </body>
 </html>

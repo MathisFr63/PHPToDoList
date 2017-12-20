@@ -11,15 +11,15 @@ $nbTachesParPage = 5;
 
 //BD
 
-//$host = 'hina';
-//$base = 'dbmafrizot1';
-//$identifiant = 'mafrizot1';
-//$pass = 'mafrizot1';
-
-$host = 'localhost';
+$host = 'hina';
 $base = 'dbmafrizot1';
-$identifiant = 'root';
-$pass = '';
+$identifiant = 'mafrizot1';
+$pass = 'mafrizot1';
+
+//$host = 'localhost';
+//$base = 'dbmafrizot1';
+//$identifiant = 'root';
+//$pass = '';
 
 $view['erreur'] = 'View/erreur.php';
 $view['connexion'] = 'View/Connexion.php';

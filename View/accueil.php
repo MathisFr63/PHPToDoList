@@ -20,23 +20,27 @@ if (isset($dVue)) {
         }
     } else {
         ?>
-        <div>
-            <h1 align="center">Les tâches</h1>
-            <form style="float: right;" method="post" name="myform" id="myform">
+        <nav class="navbar navbar-expand-md bg-primary">
+            <div class="container float-left">
+                <div class="collapse navbar-collapse justify-content-center">
+                    <h1 class="text-info">Les Tâches</h1>
+                </div>
+            </div>
+            <form method="post" name="myform" class="justify-content-end" id="myform">
                 <?php
                 if (isset($tachesCo)) {
                     ?>
-                    <input type="submit" value="Deconnexion">
+                    <input type="submit" class="btn btn-light" value="Deconnexion">
                     <input type="hidden" name="action" value="Deconnexion">
                     <?php
                 } else {
                     ?>
-                    <input type="submit" value="Connexion">
+                    <input type="submit" class="btn btn-light" value="Connexion">
                     <input type="hidden" name="action" value="Connexion">
                 <?php }
                 ?>
             </form>
-        </div>
+        </nav>
 
         <?php
         if (isset($taches)) {
@@ -60,7 +64,7 @@ if (isset($dVue)) {
                             <?php
                             print $row->getNom() . ' : ' . $row->getDescription();
                             ?>
-                            <input type="submit" value="Supprimer">
+                            <input type="submit" class="btn btn-secondary" value="Supprimer">
                             <input type="hidden" name="idTache" value="<?php print $row->getId() ?>">
                             <input type="hidden" name="action" value="SupprimerTachePublique">
                             <?php
@@ -72,10 +76,10 @@ if (isset($dVue)) {
                 }
             }
             ?>
-            <form method="post" name="myform" id="myform">
-                <input type="text" name="txtNom" required>
-                <input type="text" name="txtDesc" required>
-                <input type="submit" value="Ajouter">
+            <form method="post" name="myform" class="ml-2" id="myform">
+                <input type="text" class="form-control-sm" name="txtNom" required>
+                <input type="text" class="form-control-sm" name="txtDesc" required>
+                <input type="submit" class="btn btn-secondary" value="Ajouter">
                 <input type="hidden" name="action" value="AddPublicTask">
             </form>
             <?php
@@ -116,7 +120,7 @@ if (isset($dVue)) {
                             <?php
                             print $row->getNom() . ' : ' . $row->getDescription();
                             ?>
-                            <input type="submit" value="Supprimer">
+                            <input type="submit" class="btn btn-secondary" value="Supprimer">
                             <input type="hidden" name="idTache" value="<?php print $row->getId() ?>">
                             <input type="hidden" name="user" value="<?php print $id ?>">
                             <input type="hidden" name="action" value="SupprimerTachePrivee">
@@ -129,11 +133,11 @@ if (isset($dVue)) {
                 }
             }
             ?>
-            <form method="post" name="myform" id="myform">
-                <input type="text" name="txtNom" required>
-                <input type="text" name="txtDesc" required>
+            <form method="post" name="myform" class="ml-2" id="myform">
+                <input type="text" class="form-control-sm" name="txtNom" required>
+                <input type="text" class="form-control-sm" name="txtDesc" required>
                 <input type="hidden" name="user" value="<?php print $id ?>">
-                <input type="submit" value="Ajouter">
+                <input type="submit" class="btn btn-secondary" value="Ajouter">
                 <input type="hidden" name="action" value="AddPrivateTask">
             </form>
             <?php
@@ -144,7 +148,7 @@ if (isset($dVue)) {
             for ($i = $pageMinPrivee; $i < $pagePrivee; $i++)
                 echo '<a href="index.php?' . $request . 'p=' . $page . '&&p2=' . $i . '" style="padding-left: 10px"><p>' . $i . '</p></a> ';
             for ($i = $pagePrivee; $i <= $pageMaxPrivee; $i++) {
-                if ($i == $page)
+                if ($i == $pagePrivee)
                     echo '<a href="index.php?' . $request . 'p=' . $page . '&&p2=' . $i . '" style="padding-left: 10px"><p><strong>' . $i . '</strong></p></a> ';
                 else
                     echo '<a href="index.php?' . $request . 'p=' . $page . '&&p2=' . $i . '" style="padding-left: 10px"><p>' . $i . '</p></a> ';
