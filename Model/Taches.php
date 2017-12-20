@@ -9,16 +9,36 @@
 //Sert a rien pour le moment.
 class Taches
 {
+    private $id;
     private $nom;
     private $description;
-    private $fait;
+    private $status;
     private $user;
 
-    public function __construct(string $nom, string $desc, string $fait, string $user)
+    public function __construct(int $id, string $nom, string $desc, bool $status, string $user)
     {
+        $this->id = $id;
         $this->nom = $nom;
         $this->description = $desc;
-        $this->fait = $fait;
+        $this->status = $status;
         $this->user = $user;
+    }
+
+    function  getId(): int
+    {
+        return $this->id;
+    }
+    function getStatus(): bool
+    {
+        return $this->status;
+    }
+
+    function getNom(): string
+    {
+        return $this->nom;
+    }
+
+    function getDescription(): string{
+        return $this->description;
     }
 }

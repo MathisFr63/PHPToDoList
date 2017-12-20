@@ -115,7 +115,8 @@ class tacheGateway
     {
         try {
             $this->con->executeQuery('select * from tache ORDER BY id LIMIT :premiereTache, :derniereTache', array(':premiereTache' => array($premiereTache, PDO::PARAM_INT), ':derniereTache' => array($derniereTache, PDO::PARAM_INT)));
-            return $this->con->getResults();
+            $res = $this->con->getResults();
+            return isset($res) ? TacheFactory::createAll($res) : NULL;
         } catch (PDOException $e) {
             throw new Exception($e);
         }
@@ -125,7 +126,8 @@ class tacheGateway
     {
         try {
             $this->con->executeQuery('select * from tachep where user = :user ORDER BY id LIMIT :premiereTache, :derniereTache', array(':user' => array($login, PDO::PARAM_STR), ':premiereTache' => array($premiereTachePrivee, PDO::PARAM_INT), ':derniereTache' => array($derniereTachePrivee, PDO::PARAM_INT)));
-            return $this->con->getResults();
+            $res = $this->con->getResults();
+            return isset($res) ? TacheFactory::createAll($res) : NULL;
         } catch (PDOException $e) {
             throw new Exception($e);
         }

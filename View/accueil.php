@@ -46,23 +46,22 @@ if (isset($dVue)) {
             <hr>
             <?php
             if (count($taches) > 0) {
-
                 foreach ($taches as $row) {
                     ?>
                     <div class="d-flex align-items-center">
                         <form style="margin-left: 10px; margin-right: 10px" id='status' name="status" method='post'
                               action="index.php?action=UpdateStatusPublic">
-                            <input type="hidden" name="idTache" value="<?php print $row['id'] ?>">
-                            <input name="checkFait" <?php if ($row['status'] == 1) echo 'checked'; ?> type="checkbox"
+                            <input type="hidden" name="idTache" value="<?php print $row->getId() ?>">
+                            <input name="checkFait" <?php if ($row->getStatus() == 1) echo 'checked'; ?> type="checkbox"
                                    onclick="this.form.submit();">
                         </form>
 
                         <form method="post" name="myform" id="myform" style="display: inline-block">
                             <?php
-                            print $row['nom'] . ' : ' . $row['description'];
+                            print $row->getNom() . ' : ' . $row->getDescription();
                             ?>
                             <input type="submit" value="Supprimer">
-                            <input type="hidden" name="idTache" value="<?php print $row['id'] ?>">
+                            <input type="hidden" name="idTache" value="<?php print $row->getId() ?>">
                             <input type="hidden" name="action" value="SupprimerTachePublique">
                             <?php
                             print "<BR>";
@@ -106,18 +105,19 @@ if (isset($dVue)) {
                 foreach ($tachesCo as $row) {
                     ?>
                     <div class="d-flex align-items-center">
-                        <form style="margin-left: 10px; margin-right: 10px" id='status' name="status" method='post' action="index.php?action=UpdateStatusPrivee">
-                            <input type="hidden" name="idTache" value="<?php print $row['id'] ?>">
-                            <input name="checkFait" <?php if ($row['status'] == 1) echo 'checked'; ?> type="checkbox"
+                        <form style="margin-left: 10px; margin-right: 10px" id='status' name="status" method='post'
+                              action="index.php?action=UpdateStatusPrivee">
+                            <input type="hidden" name="idTache" value="<?php print $row->getId() ?>">
+                            <input name="checkFait" <?php if ($row->getStatus() == 1) echo 'checked'; ?> type="checkbox"
                                    onclick="this.form.submit();">
                         </form>
 
                         <form method="post" name="myform" id="myform">
                             <?php
-                            print $row['nom'] . ' : ' . $row['description'];
+                            print $row->getNom() . ' : ' . $row->getDescription();
                             ?>
                             <input type="submit" value="Supprimer">
-                            <input type="hidden" name="idTache" value="<?php print $row['id'] ?>">
+                            <input type="hidden" name="idTache" value="<?php print $row->getId() ?>">
                             <input type="hidden" name="user" value="<?php print $id ?>">
                             <input type="hidden" name="action" value="SupprimerTachePrivee">
                             <?php
