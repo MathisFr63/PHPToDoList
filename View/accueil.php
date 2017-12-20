@@ -1,11 +1,8 @@
 <html>
 <head><title>Tâches</title>
-    <link rel="icon" href="views/imgs/favicon.ico"/>
-    <link type="text/css" rel="stylesheet"
-          href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link type="text/css" rel="stylesheet"
-          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"
-          integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+    <link type="text/css" rel="stylesheet" href="css/bootstrap.css">
+    <link type="text/css" rel="stylesheet" href="css/bootstrap-grid.css">
+    <link type="text/css" rel="stylesheet" href="css/bootstrap-reboot.css">
 </head>
 
 </head>

@@ -46,11 +46,9 @@
 <body>
 <?php
 
-// on v�rifie les donn�es provenant du mod�le
 if (isset($dVue)) {
     ?>
     <div align="center">
-
 
         <?php
         if (isset($dVueEreur) && count($dVueEreur) > 0) {

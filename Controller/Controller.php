@@ -73,9 +73,8 @@ class Controller
         global $rep, $view;
 
         $dVueEreur = array();
-
+        
         if (isset($_POST['txtId']) && isset($_POST['txtMdp'])) {
-            Validation::val_form($_POST['txtId'], $_POST['txtMdp'], $dVueEreur);
             $user = AdminModel::seConnecter($_POST['txtId'], $_POST['txtMdp']);
             if ($user == NULL) {
                 $erreurConnexion = true;
